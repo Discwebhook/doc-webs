@@ -3,19 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Static GitHub Page</title>
-    <script src="config.js" defer></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const display = document.getElementById("config-output");
-            display.textContent = Config.Test;
-        });
-    </script>
+    <title>APOW Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #1a1a1a;
+            color: white;
+        }
+
+        .content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .why-apow {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .why-apow h1 {
+            font-size: 2em;
+            color: #333;
+        }
+
+        .features {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .feature {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 20px;
+            flex: 1 1 calc(33.333% - 40px);
+            max-width: calc(33.333% - 40px);
+        }
+
+        .feature img {
+            width: 100%;
+            border-radius: 10px;
+            height: auto;
+        }
+
+        .feature h3 {
+            margin-top: 15px;
+            font-size: 1.25em;
+            color: #333;
+        }
+
+        .feature p {
+            color: #666;
+            font-size: 0.95em;
+            margin: 10px 0 0;
+        }
+
+        .stats {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 40px 0;
+        }
+
+        .stats ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            color: #333;
+            font-size: 1em;
+        }
+
+        .stats ul li {
+            margin-bottom: 10px;
+        }
+
+        .pro-tips {
+            background: #333;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .pro-tips ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .pro-tips ul li {
+            margin-bottom: 10px;
+        }
+
+        .pro-tips h2 {
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        @media (max-width: 768px) {
+            .feature {
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
 </head>
-<div class="bKy5e"><div class="rrJNTc" tabindex="-1"><div class="VfPpkd-dgl2Hf-ppHlrf-sM5MNb" data-is-touch-wrapper="true"><button class="VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-dgl2Hf LjDxcd XhPA0b LQeN7 WsSUlf jz7fPb" jscontroller="soHxf" jsaction="click:cOuCgd; mousedown:UX7yZ; mouseup:lbsD7e; mouseenter:tfO1Yc; mouseleave:JywGue; touchstart:p6p2H; touchmove:FwuNnf; touchend:yfqBxc; touchcancel:JMtRjd; focus:AHmuwe; blur:O22p3e; contextmenu:mg9Pef;mlnRJb:fLiPzd;" data-idom-class="LjDxcd XhPA0b LQeN7 WsSUlf jz7fPb" jsname="z2EeY" tabindex="0"><div class="VfPpkd-Jh9lGc"></div><div class="VfPpkd-J1Ukfc-LhBDec"></div><div class="VfPpkd-RLmnJb"></div><span jsname="V67aGc" class="VfPpkd-vQzf8d">Skip to main content</span></button></div><div class="VfPpkd-dgl2Hf-ppHlrf-sM5MNb" data-is-touch-wrapper="true"><button class="VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-dgl2Hf LjDxcd XhPA0b LQeN7 WsSUlf br90J" jscontroller="soHxf" jsaction="click:cOuCgd; mousedown:UX7yZ; mouseup:lbsD7e; mouseenter:tfO1Yc; mouseleave:JywGue; touchstart:p6p2H; touchmove:FwuNnf; touchend:yfqBxc; touchcancel:JMtRjd; focus:AHmuwe; blur:O22p3e; contextmenu:mg9Pef;mlnRJb:fLiPzd;" data-idom-class="LjDxcd XhPA0b LQeN7 WsSUlf br90J" jsname="ilzYPe" tabindex="0"><div class="VfPpkd-Jh9lGc"></div><div class="VfPpkd-J1Ukfc-LhBDec"></div><div class="VfPpkd-RLmnJb"></div><span jsname="V67aGc" class="VfPpkd-vQzf8d">Skip to navigation</span></button></div></div></div>
 <body>
-    <h1>Static GitHub Page</h1>
-    <p>The value of Config.Test is:</p>
-    <p id="config-output"></p>
+    <div class="header">
+        <h1>APOW</h1>
+    </div>
+
+    <div class="content">
+        <div class="why-apow">
+            <h1>Why do APOW?</h1>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <img src="https://lh3.googleusercontent.com/2dT9YB9S_VLhzpifnAh4iAN233ftizBpqebv-Q0PN1ncU52WbJVQE2QD2-djHBLqEbS5GPGJRvIIGrRHZPAZ8DeiEkfCkqJlzaIj1C5Qs2yZDfRGelD__xA0GRqhfEtJ2A=w1280" alt="Feature 1">
+                <h3>Fun and Interesting Problems</h3>
+                <p>I try my best to make these problems engaging and not boring. There's a lot of cool application questions and interesting physics ones.</p>
+            </div>
+
+            <div class="feature">
+                <img src="https://lh4.googleusercontent.com/p5foOfzqZRulvNEk5x2OqHHqsdZ5CJ08kov_8wpip_osyHUDfnbVZTUGZ-UhJCXJ9H2jwcRAmnL7qw5UnhETjlNIi1NMOaGESYa4MYal3v7tpWdYIUETBjpOKPnua5I0AA=w1280" alt="Feature 2">
+                <h3>Accessible to All Students</h3>
+                <p>All students that are secondary or JC (or even lower) are welcome to try the problem set. You can do it at literally any time of the day!</p>
+            </div>
+
+            <div class="feature">
+                <img src="https://lh6.googleusercontent.com/8vXaYq0Zv2iIrw4yOqutJHVWOWtBTOAYlJ3m3duaF-2rC8wmaY_0WqiuQSsiv7aLeGUrpPpfObJT4YZkTLGVjQ892N_lKj2YAVs3FlQ4G4xUlYH6jphBJLvmGsh3HuVekg=w1280" alt="Feature 3">
+                <h3>Excellent Practice for Other Competitions</h3>
+                <p>While most competitions are once a year, APOW is weekly and is excellent practice for major competitions like Astrigue, Astrochallenge, and of course SAO!</p>
+            </div>
+        </div>
+
+        <div class="stats">
+            <ul>
+                <li><strong>1,080</strong> Questions Attempted*</li>
+                <li><strong>501</strong> Correct Answers</li>
+                <li><strong>328</strong> Points Earned</li>
+                <li><strong>56</strong> Channel Followers</li>
+                <li><strong>22</strong> Total Participants</li>
+                <li><strong>10</strong> Most Submissions To A Set</li>
+            </ul>
+        </div>
+
+        <div class="pro-tips">
+            <h2>PRO TIPS</h2>
+            <ul>
+                <li>A lot of the non-calculation questions are not a direct recall, so you will have to break the question down. Often, you will need to use your brain to eliminate obvious fakes. This is a very important skill that comes with experience.</li>
+                <li>For the calculation questions, refer to your constant sheet and make sure your answer is logical.</li>
+                <li>APOWs are good practice for APOWs, so doing more sets will improve your scores in the future.</li>
+                <li>READ THE NOTES. There are tons of info if you know where to look, even if you lack knowledge in Astro.</li>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>
