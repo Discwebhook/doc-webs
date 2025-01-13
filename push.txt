@@ -1,6 +1,5 @@
 git add .
-git commit -m "Initial commit"
-Push the changes to GitHub:
+git commit -m "prototype"
 
 git branch -M main
 git remote add origin <repository-url>
