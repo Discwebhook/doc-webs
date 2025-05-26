@@ -14,6 +14,15 @@
       color: white;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    h1, h2 {
+      scroll-margin-top: 100px;
+    }
+
+
     pre code {
       display: block;
       padding: 1rem;
@@ -178,15 +187,18 @@ greet()
 
     const links = nav.querySelectorAll('a');
     function updateActive() {
-      let activeFound = false;
+      let fromTop = window.scrollY + 120; // offset from top
+    
       links.forEach(link => {
         const section = document.getElementById(link.getAttribute('href').substring(1));
         if (!section) return;
-        const rect = section.getBoundingClientRect();
-        if (!activeFound && rect.top >= 0 && rect.top < window.innerHeight / 2) {
+    
+        const offsetTop = section.offsetTop;
+        const offsetHeight = section.offsetHeight;
+    
+        if (fromTop >= offsetTop && fromTop < offsetTop + offsetHeight) {
           links.forEach(l => l.classList.remove('active'));
           link.classList.add('active');
-          activeFound = true;
         }
       });
     }
