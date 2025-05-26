@@ -22,6 +22,25 @@
       overflow-x: auto;
     }
 
+    blockquote {
+      background: #f9f9f9;
+      border-left: 10px solid #ccc;
+      margin: 1.5em 10px;
+      padding: 0.5em 10px;
+      quotes: "\201C""\201D""\2018""\2019";
+    }
+    blockquote:before {
+      color: #ccc;
+      content: open-quote;
+      font-size: 4em;
+      line-height: 0.1em;
+      margin-right: 0.25em;
+      vertical-align: -0.4em;
+    }
+    blockquote p {
+      display: inline;
+    }
+
     .callout {
       background-color: #2f2b29;
       border-left: 4px solid #2f2b29;
@@ -127,6 +146,22 @@ There are rules for naming a variable:
 4. Cannot contain any other characters (e.g. $ % # or a space)
 5. Cannot be of a reserved word that has special meaning in Python
     <b><i>false, nil, local, true, break, while, end, etc</b></i>
+
+<LUA>
+age = 15
+my_name = "Nikov"
+2A = 15            --start with number
+my country = "Singapore"  --contains a space
+cost$ = 5.80       --contains invalid special character
+repeat = true      --using a reserved word
+</LUA>
+
+The Lua programming language supports multiple assignments:
+<LUA>
+apples, favorite = 5, "apples" -- assigns apples = 5, favorite = "apples"
+</LUA>
+
+<blockquote><p>It is worth noting that all the examples used so far are examples of global variables (variables which can be accessed from anywhere in the program). They are created exactly in the same way as global variables, but they must be prefixed with the local keyword. Global variables generally serve no purpose inside Roblox Studio, as the _G variable is used for communication between scripts at the same context level. Assign variables normally using <code>local variable_name = value</code>Intermediate examples as seen later will use this keyword.</p></blockquote>
 
 <image src='assets/unity.jpeg' alt='bl' />
 `;
