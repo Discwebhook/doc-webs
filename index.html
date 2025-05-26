@@ -6,7 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Language Docs</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
     pre code {
       display: block;
       padding: 1rem;
@@ -48,14 +53,14 @@
 
 <body class="flex flex-col min-h-screen bg-gray-50">
   <!-- Topbar -->
-  <header class="w-full bg-white shadow-md p-4 flex items-center justify-between">
+  <header class="w-full bg-white shadow-md px-6 py-4 flex items-center justify-between">
     <h1 class="text-2xl font-bold text-gray-800">My Language Docs</h1>
   </header>
 
   <!-- Main area with sidebar + content -->
   <div class="flex flex-1">
-    <aside class="w-64 bg-white shadow-md p-4 sidebar overflow-y-auto">
-      <h2 class="text-lg font-bold mb-4">Documentation</h2>
+    <aside class="w-64 bg-white shadow-md p-6 sidebar overflow-y-auto border-r border-gray-200">
+      <h2 class="text-lg font-semibold mb-4 text-gray-900">Navigation</h2>
       <nav id="sidebar-nav" class="space-y-1">
         <!-- Sidebar items will be dynamically populated -->
       </nav>
@@ -68,14 +73,14 @@
 
   <script>
     const rawContent = `
-> 1 Category
+> 1Category
 >> 1.1  Sub-category
 # Header
 Brief content text
 <LUA>
 local a = "b"
 </LUA>
-<image src='assets/unity.jpeg' alt='unity for sumn reason' />
+<image src='assets/jump_example.png' alt='Jump Example' />
 `;
 
     function parseContent(raw) {
@@ -90,11 +95,11 @@ local a = "b"
       lines.forEach(line => {
         if (line.startsWith('> ')) {
           currentCategory = line.replace('> ', '').trim();
-          navHTML += `<div class='mt-2 font-semibold text-gray-800'>${currentCategory}</div>`;
+          navHTML += `<div class='mt-4 text-sm font-bold text-gray-800'>${currentCategory}</div>`;
         } else if (line.startsWith('>> ')) {
           const sub = line.replace('>> ', '').trim();
           const id = `section-${++subIndex}`;
-          navHTML += `<a href="#${id}" data-id="${id}" class="ml-4 block text-sm">${sub}</a>`;
+          navHTML += `<a href="#${id}" data-id="${id}" class="ml-4 text-sm">${sub}</a>`;
           html += `<h3 id="${id}" class="text-xl font-semibold mt-8 mb-2">${sub}</h3>`;
         } else if (line.startsWith('# ')) {
           const header = line.replace('# ', '').trim();
@@ -117,7 +122,6 @@ local a = "b"
       contentContainer.innerHTML = html;
       nav.innerHTML = navHTML;
 
-      // Highlight active link
       const links = nav.querySelectorAll('a');
       function updateActive() {
         links.forEach(link => {
