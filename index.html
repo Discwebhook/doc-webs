@@ -160,7 +160,46 @@ The Lua programming language supports multiple assignments:
 apples, favorite = 5, "apples" -- assigns apples = 5, favorite = "apples"
 </LUA>
 
-<blockquote><p>It is worth noting that all the examples used so far are examples of global variables (variables which can be accessed from anywhere in the program). They are created exactly in the same way as global variables, but they must be prefixed with the local keyword. Global variables generally serve no purpose inside Roblox Studio, as the _G variable is used for communication between scripts at the same context level. Assign variables normally using <code>local variable_name = value</code>. Intermediate examples as seen later will use this keyword.</p></blockquote>
+<blockquote><p>It is worth noting that all the examples used so far are examples of global variables (variables which can be accessed from anywhere in the program). Local variables are created exactly in the same way as global variables, but they must be prefixed with the <code>local</code> keyword. Global variables generally serve no purpose inside Roblox Studio, as the _G variable is used for communication between scripts at the same context level. Assign variables normally using <code>local variable_name = value</code>. Intermediate examples as seen later will use this keyword.</p></blockquote>
+
+## Conditional Statments
+Conditional statements are instructions that check whether an expression is true and execute a certain piece of code if it is. If the expression is not true, they just skip over that piece of code and the program continues. In Roblox Studio, the only conditional statement uses the if instruction. False and nil are both considered as <code>false</code>, while everything else is considered as <code>true</code>.
+<LUA>
+local number = 6
+
+if number < 10 then
+	print("The number " .. number .. " is smaller than ten.")
+end
+
+print(if "" then true else false) --true in Roblox Studio, false in Python
+print(0 and true) --ditto
+print(true and "0") --This prints "0" instead of true
+print(0 == 4 and 0 or 1) --This prints 4
+</LUA>
+
+## Condition-controlled loops
+Condition-controlled loops are loops that are controlled by a condition. They will keep running it while the condition is true, or until the condition is false. Lua has two statements for condition-controlled loops: the while loop and the repeat loop. Each execution of the code is called an iteration. The difference between while and repeat loops is that repeat loops will check the condition at the end of the loop while while loops will check it at the start of the loop.
+
+<LUA>
+local number = 0
+
+while number < 10 do
+  print(number)
+  number += 1 -- Increase, or "increment" the value of number by 1
+end
+</LUA>
+The code above will print 0, then 1, then 2, then 3, and so on, until 9. After the tenth iteration, <code>number</code> will no longer be smaller than ten, and therefore the loop will stop executing.
+<LUA>
+local number = 0
+
+repeat
+	print(number)
+	number += 1
+until number >= 10
+</LUA>
+The code above will do exactly the same thing as the code that used a while loop above. The main difference is that, unlike while loops, where the condition is put between the while keyword and the do keyword, the condition is put at the end of the loop, after the until keyword. The repeat loop is the only statement in Lua that creates a block and that is not closed by the end keyword (instead, using <code>until</code>).
+
+Generally, <code>while</code> loops can be used instead of <code>repeat</code> regardless of the implementation.
 
 <image src='assets/unity.jpeg' alt='bl' />
 `;
