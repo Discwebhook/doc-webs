@@ -23,9 +23,9 @@
     }
 
     .callout {
-      background-color: #1d64af;
-      border-left: 4px solid #3b82f6;
-      color: ##419bd2;
+      background-color: #2f2b29;
+      border-left: 4px solid #2f2b29;
+      color: #25333b;
       padding: 1rem;
       margin: 1.5rem 0;
     }
@@ -145,17 +145,18 @@ There are rules for naming a variable:
         if (line.startsWith('# ')) {
           currentCategory = line.replace('> ', '').trim();
           navHTML += `<div class='mt-4 text-sm font-bold text-white'>${currentCategory}</div>`;
+          html += `<h1 id="header-${currentCategory}" class="text-xl font-semibold mt-8 mb-2 text-white">${currentCategory}</h1>`;
         } else if (line.startsWith('## ')) {
           const sub = line.replace('## ', '').trim();
           const id = `section-${++subIndex}`;
           navHTML += `<a href="#${id}" data-id="${id}" class="ml-4 text-sm text-gray-400 hover:text-white">${sub}</a>`;
-          html += `<h3 id="${id}" class="text-xl font-semibold mt-8 mb-2 text-white">${sub}</h3>`;
+          html += `<h2 id="${id}" class="text-xl font-semibold mt-8 mb-2 text-white">${sub}</h2>`;
           lastCatName = sub;
         } else if (line.startsWith('### ')) {
           const sub = line.replace('### ', '').trim();
           const id = `section-"${lastCatName}"-${++subIndex}`;
           navHTML += `<a href="#${id}" data-id="${id}" class="ml-4 text-sm text-gray-400 hover:text-white">${sub}</a>`;
-          html += `<h4 id="${id}" class="text-xl font-semibold mt-8 mb-2 text-white">${sub}</h4>`;
+          html += `<h3 id="${id}" class="text-xl font-semibold mt-8 mb-2 text-white">${sub}</h3>`;
         } else if (line.startsWith('<LUA>')) {
           html += '<pre><code>';
         } else if (line.startsWith('</LUA>')) {
