@@ -73,13 +73,13 @@
   </div>
 
   <script>
-    const rawContent = `
+  const rawContent = `
 # 1. Getting Started
 ## 1.1 Hello World
 This is your first Lua script.
 
 <LUA>$Print Hello$
-local msg = \"Hello World\"
+local msg = "Hello World"
 print(msg)
 </LUA>
 
@@ -88,7 +88,7 @@ More on defining variables in Lua.
 
 <LUA>$Variable Example$
 local a = 5
-local b = \"Hello\"
+local b = "Hello"
 </LUA>
 
 # 2. Functions
@@ -97,7 +97,7 @@ How to define and use functions.
 
 <LUA>$Simple Function$
 function greet()
-  print(\"Hi there!\")
+  print("Hi there!")
 end
 greet()
 </LUA>
@@ -105,100 +105,99 @@ greet()
 
   let userFunctions = [];
 
-  function highlightLua(code) {
-    const userFuncPattern = /local\s+function\s+([a-zA-Z_]\w*)/g;
+  function extractUserFunctions(code) {
+    const localFuncRegex = /local\s+function\s+([a-zA-Z_]\w*)/g;
+    const globalFuncRegex = /function\s+([a-zA-Z_]\w*)/g;
     let match;
-    while ((match = userFuncPattern.exec(code)) !== null) {
-      if (!userFunctions.includes(match[1])) {
-        userFunctions.push(match[1]);
-      }
-    }
-  
+    while ((match = localFuncRegex.exec(code))) userFunctions.push(match[1]);
+    while ((match = globalFuncRegex.exec(code))) userFunctions.push(match[1]);
+  }
+
+  function highlightLua(code) {
     const keywords = ['local', 'function', 'if', 'then', 'end', 'for', 'in', 'do', 'return'];
     const coreFunctions = ['Instance', 'print', 'pairs'];
-  
+
     keywords.forEach(k => {
-      const regex = new RegExp(`\\b${k}\\b`, 'g');
-      code = code.replace(regex, `<span class="highlight-keyword">${k}</span>`);
+      code = code.replace(new RegExp(`\\b${k}\\b`, 'g'), `<span class="highlight-keyword">${k}</span>`);
     });
-  
+
     coreFunctions.forEach(fn => {
-      const regex = new RegExp(`\\b${fn}\\b`, 'g');
-      code = code.replace(regex, `<span class="highlight-core">${fn}</span>`);
+      code = code.replace(new RegExp(`\\b${fn}\\b`, 'g'), `<span class="highlight-core">${fn}</span>`);
     });
-  
+
     userFunctions.forEach(fn => {
-      const regex = new RegExp(`\\b${fn}\\b`, 'g');
-      code = code.replace(regex, `<span class="highlight-func">${fn}</span>`);
+      code = code.replace(new RegExp(`\\b${fn}\\b`, 'g'), `<span class="highlight-func">${fn}</span>`);
     });
-  
+
     return code;
   }
 
-    function parseContent(raw) {
-  const lines = raw.split('\n');
-  const contentContainer = document.getElementById('content');
-  const nav = document.getElementById('sidebar-nav');
-  let html = '';
-  let navHTML = '';
-  let sectionIndex = 0;
-  let luaBuffer = '';
-  let inLuaBlock = false;
+  function parseContent(raw) {
+    const lines = raw.split('\n');
+    const contentContainer = document.getElementById('content');
+    const nav = document.getElementById('sidebar-nav');
+    let html = '';
+    let navHTML = '';
+    let sectionIndex = 0;
+    let luaBuffer = '';
+    let inLuaBlock = false;
 
-  lines.forEach(line => {
-    if (line.startsWith('# ')) {
-      const title = line.slice(2).trim();
-      const id = `section-${sectionIndex++}`;
-      navHTML += `<a href="#${id}" class="text-white font-semibold">${title}</a>`;
-      html += `<h1 id="${id}" class="text-2xl font-bold mt-8 mb-4">${title}</h1>`;
-    } else if (line.startsWith('## ')) {
-      const subtitle = line.slice(3).trim();
-      const id = `section-${sectionIndex++}`;
-      navHTML += `<a href="#${id}" class="ml-4 text-sm text-gray-300">${subtitle}</a>`;
-      html += `<h2 id="${id}" class="text-xl font-semibold mt-6 mb-3">${subtitle}</h2>`;
-    } else if (line.startsWith('<LUA>')) {
-      inLuaBlock = true;
-      luaBuffer = '';
-      const titleMatch = line.match(/<LUA>\$(.*?)\$/);
-      if (titleMatch) {
-        html += `<div class="my-4"><div class="code-header">${titleMatch[1]}</div><pre><code>`;
+    lines.forEach(line => {
+      if (line.startsWith('# ')) {
+        const title = line.slice(2).trim();
+        const id = `section-${sectionIndex++}`;
+        navHTML += `<a href="#${id}" class="block text-white font-semibold hover:bg-gray-800 rounded px-2 py-1">${title}</a>`;
+        html += `<h1 id="${id}" class="text-2xl font-bold mt-8 mb-4">${title}</h1>`;
+      } else if (line.startsWith('## ')) {
+        const subtitle = line.slice(3).trim();
+        const id = `section-${sectionIndex++}`;
+        navHTML += `<a href="#${id}" class="block ml-4 text-sm text-gray-300 hover:bg-gray-800 rounded px-2 py-1">${subtitle}</a>`;
+        html += `<h2 id="${id}" class="text-xl font-semibold mt-6 mb-3">${subtitle}</h2>`;
+      } else if (line.startsWith('<LUA>')) {
+        inLuaBlock = true;
+        luaBuffer = '';
+        const titleMatch = line.match(/<LUA>\$(.*?)\$/);
+        if (titleMatch) {
+          html += `<div class="my-4"><div class="code-header">${titleMatch[1]}</div><pre><code>`;
+        } else {
+          html += '<pre><code>';
+        }
+      } else if (line.startsWith('</LUA>')) {
+        extractUserFunctions(luaBuffer);  // FIRST: collect function names
+        html += highlightLua(luaBuffer) + '</code></pre></div>';  // THEN: highlight
+        inLuaBlock = false;
+      } else if (inLuaBlock) {
+        luaBuffer += line + '\n';
       } else {
-        html += '<pre><code>';
-      }
-    } else if (line.startsWith('</LUA>')) {
-      html += highlightLua(luaBuffer) + '</code></pre></div>';
-      inLuaBlock = false;
-    } else if (inLuaBlock) {
-      luaBuffer += line + '\n';
-    } else {
-      html += `<p class="mb-4 text-gray-300">${line}</p>`;
-    }
-  });
-
-  contentContainer.innerHTML = html;
-  nav.innerHTML = navHTML;
-
-  const links = nav.querySelectorAll('a');
-  function updateActive() {
-    let activeFound = false;
-    links.forEach(link => {
-      const section = document.getElementById(link.getAttribute('href').substring(1));
-      if (!section) return;
-      const rect = section.getBoundingClientRect();
-      if (!activeFound && rect.top >= 0 && rect.top < window.innerHeight / 2) {
-        links.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-        activeFound = true;
+        html += `<p class="mb-4 text-gray-300">${line}</p>`;
       }
     });
+
+    contentContainer.innerHTML = html;
+    nav.innerHTML = navHTML;
+
+    const links = nav.querySelectorAll('a');
+    function updateActive() {
+      let activeFound = false;
+      links.forEach(link => {
+        const section = document.getElementById(link.getAttribute('href').substring(1));
+        if (!section) return;
+        const rect = section.getBoundingClientRect();
+        if (!activeFound && rect.top >= 0 && rect.top < window.innerHeight / 2) {
+          links.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+          activeFound = true;
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActive);
+    updateActive();
   }
 
-  window.addEventListener('scroll', updateActive);
-  updateActive();
-}
+  parseContent(rawContent);
+</script>
 
-    parseContent(rawContent);
-  </script>
 </body>
 
 </html>
