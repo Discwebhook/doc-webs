@@ -20,156 +20,108 @@
       background-color: #1e1e1e;
       color: #d4d4d4;
       font-family: Consolas, monospace;
-      border-radius: 0.5rem;
+      border-radius: 0 0 0.5rem 0.5rem;
       overflow-x: auto;
-    }
-
-    blockquote {
-      background: #f9f9f9;
-      border-left: 10px solid #ccc;
-      margin: 1.5em 10px;
-      padding: 0.5em 10px;
-      quotes: "\201C""\201D""\2018""\2019";
-    }
-
-    blockquote:before {
-      color: #ccc;
-      content: open-quote;
-      font-size: 4em;
-      line-height: 0.1em;
-      margin-right: 0.25em;
-      vertical-align: -0.4em;
-    }
-
-    blockquote p {
-      display: inline;
-    }
-
-    .callout {
-      background-color: #2f2b29;
-      border-left: 4px solid #2f2b29;
-      color: #25333b;
-      padding: 1rem;
-      margin: 1.5rem 0;
     }
 
     .sidebar a.active {
       color: #3b82f6;
       font-weight: bold;
-    }
-
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      width: 250px;
-      background-color: #1f1f1f;
-      padding: 20px;
-      border-right: 2px solid #333;
-      overflow-y: auto;
-      z-index: 100;
-    }
-
-    .sidebar h2 {
-      color: #fff;
-      margin-bottom: 20px;
     }
 
     .sidebar a {
       display: block;
-      color: #bbb;
-      margin-top: 8px;
-      font-size: 14px;
-      text-decoration: none;
+      padding: 0.5rem;
+      border-radius: 0.375rem;
+      transition: background-color 0.2s;
     }
 
     .sidebar a:hover {
-      color: #fff;
+      background-color: #2d2d2d;
     }
 
-    .sidebar a.active {
-      color: #3b82f6;
-      font-weight: bold;
-    }
-
-    .doc-content {
-      margin-left: 270px;
-      padding: 20px;
-      min-height: 100vh;
-    }
-
-    .doc-content h1,
-    .doc-content h2,
-    .doc-content h3 {
-      margin-top: 20px;
-      color: #fff;
-    }
-
-    .doc-content p {
-      margin-bottom: 20px;
-      color: #ddd;
-    }
-
-    .lua-header {
+    .code-header {
       background-color: #333;
-      color: #fff;
-      padding: 10px;
-      font-size: 16px;
-      margin-top: 20px;
-      border-radius: 5px;
-      margin-bottom: 10px;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
     }
 
-    .lua-block {
-      background-color: #1e1e1e;
-      padding: 15px;
-      border-radius: 8px;
-      margin-top: 10px;
-      font-family: Consolas, monospace;
+    .highlight-keyword {
+      color: #569CD6;
+    }
+
+    .highlight-core {
+      color: #4EC9B0;
+    }
+
+    .highlight-func {
+      color: #DCDCAA;
     }
   </style>
 </head>
 
 <body>
-  <!-- Topbar -->
-  <header class="bg-gray-800 px-6 py-4 shadow-md z-10">
-    <h1 class="text-2xl font-bold text-white">My Language Docs</h1>
-  </header>
-
   <div class="flex">
-    <aside class="sidebar">
-      <h2 class="text-lg font-semibold text-white">Navigation</h2>
-      <nav id="sidebar-nav" class="space-y-1">
-        <!-- Sidebar content will go here -->
-      </nav>
+    <aside class="w-64 bg-gray-900 p-6 h-screen overflow-y-auto border-r border-gray-800 sidebar sticky top-0">
+      <nav id="sidebar-nav" class="space-y-1"></nav>
     </aside>
 
-    <main class="flex-1 doc-content" id="content">
-      <!-- Document content will go here -->
-    </main>
+    <main class="flex-1 p-8 doc-content" id="content"></main>
   </div>
 
   <script>
     const rawContent = `
-# 1. Lorem
-## 1.1 Ipsum
-Lorem ipsum dolor sit amet.
+# 1. Getting Started
+## 1.1 Hello World
+This is your first Lua script.
 
-<LUA>$Title: Lua Example$
-local a = "Hello World"
-print(a)
+<LUA>$Print Hello$
+local msg = \"Hello World\"
+print(msg)
 </LUA>
 
-### 1.1.1 Sub-Ipsum
-Another detail about Ipsum.
+## 1.2 Variables
+More on defining variables in Lua.
 
-<LUA>$Title: Another Lua Example$
-local x = 10
-local y = 20
-print(x + y)
+<LUA>$Variable Example$
+local a = 5
+local b = \"Hello\"
+</LUA>
+
+# 2. Functions
+## 2.1 Basic Functions
+How to define and use functions.
+
+<LUA>$Simple Function$
+function greet()
+  print(\"Hi there!\")
+end
+greet()
 </LUA>
 `;
+
+    const keywords = ['local', 'function', 'if', 'then', 'end', 'for', 'in', 'do', 'return'];
+    const coreFunctions = ['Instance', 'print', 'pairs'];
+    const userFunctions = ['greet'];
+
+    function highlightLua(code) {
+      keywords.forEach(k => {
+        const regex = new RegExp(`\\b${k}\\b`, 'g');
+        code = code.replace(regex, `<span class="highlight-keyword">${k}</span>`);
+      });
+      coreFunctions.forEach(fn => {
+        const regex = new RegExp(`\\b${fn}\\b`, 'g');
+        code = code.replace(regex, `<span class="highlight-core">${fn}</span>`);
+      });
+      userFunctions.forEach(fn => {
+        const regex = new RegExp(`\\b${fn}\\b`, 'g');
+        code = code.replace(regex, `<span class="highlight-func">${fn}</span>`);
+      });
+      return code;
+    }
 
     function parseContent(raw) {
       const lines = raw.split('\n');
@@ -177,32 +129,33 @@ print(x + y)
       const nav = document.getElementById('sidebar-nav');
       let html = '';
       let navHTML = '';
-      let currentCategory = '';
       let subIndex = 0;
-      let lastCatName = "start"
+      let lastCatId = '';
 
       lines.forEach(line => {
         if (line.startsWith('# ')) {
-          currentCategory = line.replace('# ', '').trim();
-          navHTML += `<div class='mt-4 text-sm font-bold text-white'>${currentCategory}</div>`;
-          html += `<h1 id="header-${currentCategory}" class="text-xl font-semibold mt-8 mb-2 text-white">${currentCategory}</h1>`;
+          const cat = line.slice(2).trim();
+          const id = `cat-${subIndex++}`;
+          navHTML += `<a href="#${id}" class="text-white font-semibold">${cat}</a>`;
+          html += `<h1 id="${id}" class="text-2xl font-bold mt-8 mb-4">${cat}</h1>`;
+          lastCatId = id;
         } else if (line.startsWith('## ')) {
-          const sub = line.replace('## ', '').trim();
-          const id = `section-${++subIndex}`;
-          navHTML += `<a href="#${id}" data-id="${id}" class="ml-4 text-sm text-gray-400 hover:text-white">${sub}</a>`;
-          html += `<h2 id="${id}" class="text-xl font-semibold mt-8 mb-2 text-white">${sub}</h2>`;
-          lastCatName = sub;
-        } else if (line.startsWith('### ')) {
-          const sub = line.replace('### ', '').trim();
-          const id = `section-${lastCatName}-${++subIndex}`;
-          navHTML += `<a href="#${id}" data-id="${id}" class="ml-6 text-sm text-gray-400 hover:text-white">${sub}</a>`;
-          html += `<h3 id="${id}" class="text-xl font-semibold mt-8 mb-2 text-white">${sub}</h3>`;
+          const sub = line.slice(3).trim();
+          const id = `sub-${subIndex++}`;
+          navHTML += `<a href="#${id}" class="ml-4 text-sm text-gray-300">${sub}</a>`;
+          html += `<h2 id="${id}" class="text-xl font-semibold mt-6 mb-3">${sub}</h2>`;
         } else if (line.startsWith('<LUA>')) {
-          const titleMatch = line.match(/\$Title: (.*?)\$/);
-          const title = titleMatch ? titleMatch[1] : "Code Block";
-          html += `<div class="lua-header">${title}</div><div class="lua-block"><pre><code>`;
+          const titleMatch = line.match(/<LUA>\\$(.*?)\\$/);
+          if (titleMatch) {
+            const blockTitle = titleMatch[1];
+            html += `<div class="my-4"><div class="code-header">${blockTitle}</div><pre><code>`;
+          } else {
+            html += '<pre><code>';
+          }
         } else if (line.startsWith('</LUA>')) {
           html += '</code></pre></div>';
+        } else if (html.endsWith('<pre><code>')) {
+          html += highlightLua(line) + '\\n';
         } else {
           html += `<p class="mb-4 text-gray-300">${line}</p>`;
         }
@@ -215,7 +168,7 @@ print(x + y)
       function updateActive() {
         let activeFound = false;
         links.forEach(link => {
-          const section = document.getElementById(link.dataset.id);
+          const section = document.getElementById(link.getAttribute('href').substring(1));
           if (!section) return;
           const rect = section.getBoundingClientRect();
           if (!activeFound && rect.top >= 0 && rect.top < window.innerHeight / 2) {
