@@ -8,20 +8,20 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: 'Inter', sans-serif;
       background-color: #111;
       color: white;
+      margin: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-    
     h1, h2 {
-      scroll-margin-top: 100px;
+      scroll-margin-top: 120px;
     }
-
 
     pre code {
       display: block;
@@ -73,16 +73,18 @@
 </head>
 
 <body>
-  <div class="flex">
-    <aside class="w-64 bg-gray-900 p-6 h-screen overflow-y-auto border-r border-gray-800 sidebar sticky top-0">
+  <div class="flex min-h-screen">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-gray-900 p-6 overflow-y-auto border-r border-gray-800 sidebar sticky top-0 h-screen">
       <nav id="sidebar-nav" class="space-y-1"></nav>
     </aside>
 
+    <!-- Main Content -->
     <main class="flex-1 p-8 doc-content" id="content"></main>
   </div>
 
   <script>
-  const rawContent = `
+    const rawContent = `
 # 1. Getting Started
 ## 1.1 Hello World
 This is your first Lua script.
@@ -112,104 +114,102 @@ greet()
 </LUA>
 `;
 
-  let userFunctions = [];
+    let userFunctions = [];
 
-  function extractUserFunctions(code) {
-    const localFuncRegex = /local\s+function\s+([a-zA-Z_]\w*)/g;
-    const globalFuncRegex = /function\s+([a-zA-Z_]\w*)/g;
-    let match;
-    while ((match = localFuncRegex.exec(code))) userFunctions.push(match[1]);
-    while ((match = globalFuncRegex.exec(code))) userFunctions.push(match[1]);
-  }
-
-  function highlightLua(code) {
-    const keywords = ['local', 'function', 'if', 'then', 'end', 'for', 'in', 'do', 'return'];
-    const coreFunctions = ['Instance', 'print', 'pairs'];
-
-    keywords.forEach(k => {
-      code = code.replace(new RegExp(`\\b${k}\\b`, 'g'), `<span class="highlight-keyword">${k}</span>`);
-    });
-
-    coreFunctions.forEach(fn => {
-      code = code.replace(new RegExp(`\\b${fn}\\b`, 'g'), `<span class="highlight-core">${fn}</span>`);
-    });
-
-    userFunctions.forEach(fn => {
-      code = code.replace(new RegExp(`\\b${fn}\\b`, 'g'), `<span class="highlight-func">${fn}</span>`);
-    });
-
-    return code;
-  }
-
-  function parseContent(raw) {
-    const lines = raw.split('\n');
-    const contentContainer = document.getElementById('content');
-    const nav = document.getElementById('sidebar-nav');
-    let html = '';
-    let navHTML = '';
-    let sectionIndex = 0;
-    let luaBuffer = '';
-    let inLuaBlock = false;
-
-    lines.forEach(line => {
-      if (line.startsWith('# ')) {
-        const title = line.slice(2).trim();
-        const id = `section-${sectionIndex++}`;
-        navHTML += `<a href="#${id}" class="block text-white font-semibold hover:bg-gray-800 rounded px-2 py-1">${title}</a>`;
-        html += `<h1 id="${id}" class="text-2xl font-bold mt-8 mb-4">${title}</h1>`;
-      } else if (line.startsWith('## ')) {
-        const subtitle = line.slice(3).trim();
-        const id = `section-${sectionIndex++}`;
-        navHTML += `<a href="#${id}" class="block ml-4 text-sm text-gray-300 hover:bg-gray-800 rounded px-2 py-1">${subtitle}</a>`;
-        html += `<h2 id="${id}" class="text-xl font-semibold mt-6 mb-3">${subtitle}</h2>`;
-      } else if (line.startsWith('<LUA>')) {
-        inLuaBlock = true;
-        luaBuffer = '';
-        const titleMatch = line.match(/<LUA>\$(.*?)\$/);
-        if (titleMatch) {
-          html += `<div class="my-4"><div class="code-header">${titleMatch[1]}</div><pre><code>`;
-        } else {
-          html += '<pre><code>';
-        }
-      } else if (line.startsWith('</LUA>')) {
-        extractUserFunctions(luaBuffer);  // FIRST: collect function names
-        html += highlightLua(luaBuffer) + '</code></pre></div>';  // THEN: highlight
-        inLuaBlock = false;
-      } else if (inLuaBlock) {
-        luaBuffer += line + '\n';
-      } else {
-        html += `<p class="mb-4 text-gray-300">${line}</p>`;
-      }
-    });
-
-    contentContainer.innerHTML = html;
-    nav.innerHTML = navHTML;
-
-    const links = nav.querySelectorAll('a');
-    function updateActive() {
-      let fromTop = window.scrollY + 120; // offset from top
-    
-      links.forEach(link => {
-        const section = document.getElementById(link.getAttribute('href').substring(1));
-        if (!section) return;
-    
-        const offsetTop = section.offsetTop;
-        const offsetHeight = section.offsetHeight;
-    
-        if (fromTop >= offsetTop && fromTop < offsetTop + offsetHeight) {
-          links.forEach(l => l.classList.remove('active'));
-          link.classList.add('active');
-        }
-      });
+    function extractUserFunctions(code) {
+      const localFuncRegex = /local\s+function\s+([a-zA-Z_]\w*)/g;
+      const globalFuncRegex = /function\s+([a-zA-Z_]\w*)/g;
+      let match;
+      while ((match = localFuncRegex.exec(code))) userFunctions.push(match[1]);
+      while ((match = globalFuncRegex.exec(code))) userFunctions.push(match[1]);
     }
 
-    window.addEventListener('scroll', updateActive);
-    updateActive();
-  }
+    function highlightLua(code) {
+      const keywords = ['local', 'function', 'if', 'then', 'end', 'for', 'in', 'do', 'return'];
+      const coreFunctions = ['Instance', 'print', 'pairs'];
 
-  parseContent(rawContent);
-</script>
+      keywords.forEach(k => {
+        code = code.replace(new RegExp(`\\b${k}\\b`, 'g'), `<span class="highlight-keyword">${k}</span>`);
+      });
 
+      coreFunctions.forEach(fn => {
+        code = code.replace(new RegExp(`\\b${fn}\\b`, 'g'), `<span class="highlight-core">${fn}</span>`);
+      });
+
+      userFunctions.forEach(fn => {
+        code = code.replace(new RegExp(`\\b${fn}\\b`, 'g'), `<span class="highlight-func">${fn}</span>`);
+      });
+
+      return code;
+    }
+
+    function parseContent(raw) {
+      const lines = raw.split('\n');
+      const contentContainer = document.getElementById('content');
+      const nav = document.getElementById('sidebar-nav');
+      let html = '';
+      let navHTML = '';
+      let sectionIndex = 0;
+      let luaBuffer = '';
+      let inLuaBlock = false;
+
+      lines.forEach(line => {
+        if (line.startsWith('# ')) {
+          const title = line.slice(2).trim();
+          const id = `section-${sectionIndex++}`;
+          navHTML += `<a href="#${id}" class="block text-white font-semibold hover:bg-gray-800 rounded px-2 py-1">${title}</a>`;
+          html += `<h1 id="${id}" class="text-2xl font-bold mt-16 mb-4">${title}</h1>`;
+        } else if (line.startsWith('## ')) {
+          const subtitle = line.slice(3).trim();
+          const id = `section-${sectionIndex++}`;
+          navHTML += `<a href="#${id}" class="block ml-4 text-sm text-gray-300 hover:bg-gray-800 rounded px-2 py-1">${subtitle}</a>`;
+          html += `<h2 id="${id}" class="text-xl font-semibold mt-12 mb-3">${subtitle}</h2>`;
+        } else if (line.startsWith('<LUA>')) {
+          inLuaBlock = true;
+          luaBuffer = '';
+          const titleMatch = line.match(/<LUA>\$(.*?)\$/);
+          if (titleMatch) {
+            html += `<div class="my-4"><div class="code-header">${titleMatch[1]}</div><pre><code>`;
+          } else {
+            html += '<pre><code>';
+          }
+        } else if (line.startsWith('</LUA>')) {
+          extractUserFunctions(luaBuffer);
+          html += highlightLua(luaBuffer) + '</code></pre></div>';
+          inLuaBlock = false;
+        } else if (inLuaBlock) {
+          luaBuffer += line + '\n';
+        } else {
+          html += `<p class="mb-4 text-gray-300">${line}</p>`;
+        }
+      });
+
+      contentContainer.innerHTML = html;
+      nav.innerHTML = navHTML;
+
+      const links = nav.querySelectorAll('a');
+
+      function updateActive() {
+        let fromTop = window.scrollY + 140;
+        links.forEach(link => {
+          const section = document.getElementById(link.getAttribute('href').substring(1));
+          if (!section) return;
+
+          const top = section.offsetTop;
+          const bottom = top + section.offsetHeight;
+          if (fromTop >= top && fromTop < bottom) {
+            links.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', updateActive);
+      updateActive();
+    }
+
+    parseContent(rawContent);
+  </script>
 </body>
 
 </html>
