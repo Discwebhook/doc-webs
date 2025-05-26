@@ -1,175 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APOW Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Language Docs</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    pre code {
+      display: block;
+      padding: 1rem;
+      background-color: #1e1e1e;
+      color: #d4d4d4;
+      font-family: Consolas, monospace;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+    }
 
-        .header {
-            text-align: center;
-            padding: 20px;
-            background-color: #1a1a1a;
-            color: white;
-        }
+    .callout {
+      @apply bg-blue-100 border-l-4 border-blue-500 text-blue-900 p-4 my-6;
+    }
 
-        .content {
-            padding: 20px;
-            max-width: 1200px;
-            margin: auto;
-        }
+    .doc-content h3 {
+      @apply text-xl font-semibold mt-6 mb-2;
+    }
 
-        .why-apow {
-            text-align: center;
-            margin: 40px 0;
-        }
-
-        .why-apow h1 {
-            font-size: 2em;
-            color: #333;
-        }
-
-        .features {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .feature {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            padding: 20px;
-            flex: 1 1 calc(33.333% - 40px);
-            max-width: calc(33.333% - 40px);
-        }
-
-        .feature img {
-            width: 100%;
-            border-radius: 10px;
-            height: auto;
-        }
-
-        .feature h3 {
-            margin-top: 15px;
-            font-size: 1.25em;
-            color: #333;
-        }
-
-        .feature p {
-            color: #666;
-            font-size: 0.95em;
-            margin: 10px 0 0;
-        }
-
-        .stats {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin: 40px 0;
-        }
-
-        .stats ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            color: #333;
-            font-size: 1em;
-        }
-
-        .stats ul li {
-            margin-bottom: 10px;
-        }
-
-        .pro-tips {
-            background: #333;
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        .pro-tips ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .pro-tips ul li {
-            margin-bottom: 10px;
-        }
-
-        .pro-tips h2 {
-            margin-bottom: 15px;
-            font-size: 1.5em;
-        }
-
-        @media (max-width: 768px) {
-            .feature {
-                flex: 1 1 100%;
-                max-width: 100%;
-            }
-        }
-    </style>
+    .sidebar a {
+      @apply block text-gray-700 hover:text-blue-600 py-1;
+    }
+  </style>
 </head>
-<body>
-    <div class="header">
-        <h1>APOW</h1>
-    </div>
 
-    <div class="content">
-        <div class="why-apow">
-            <h1>Why do APOW?</h1>
-        </div>
+<body class="flex min-h-screen bg-gray-50">
+  <aside class="w-64 bg-white shadow-md p-4 sidebar">
+    <h2 class="text-lg font-bold mb-4">Documentation</h2>
+    <nav id="sidebar-nav">
+      <!-- Sidebar items will be dynamically populated -->
+    </nav>
+  </aside>
 
-        <div class="features">
-            <div class="feature">
-                <img src="https://lh3.googleusercontent.com/2dT9YB9S_VLhzpifnAh4iAN233ftizBpqebv-Q0PN1ncU52WbJVQE2QD2-djHBLqEbS5GPGJRvIIGrRHZPAZ8DeiEkfCkqJlzaIj1C5Qs2yZDfRGelD__xA0GRqhfEtJ2A=w1280" alt="Feature 1">
-                <h3>Fun and Interesting Problems</h3>
-                <p>I try my best to make these problems engaging and not boring. There's a lot of cool application questions and interesting physics ones.</p>
-            </div>
+  <main class="flex-1 p-8 doc-content" id="content">
+    <!-- Content will be inserted here -->
+  </main>
 
-            <div class="feature">
-                <img src="https://lh4.googleusercontent.com/p5foOfzqZRulvNEk5x2OqHHqsdZ5CJ08kov_8wpip_osyHUDfnbVZTUGZ-UhJCXJ9H2jwcRAmnL7qw5UnhETjlNIi1NMOaGESYa4MYal3v7tpWdYIUETBjpOKPnua5I0AA=w1280" alt="Feature 2">
-                <h3>Accessible to All Students</h3>
-                <p>All students that are secondary or JC (or even lower) are welcome to try the problem set. You can do it at literally any time of the day!</p>
-            </div>
+  <script>
+    const rawContent = `
+> 1Category
+>> 1.1  Sub-category
+# Header
+Brief content text
+<LUA>
+local a = "b"
+</LUA>
+<image src='/assets/luaPageTest.png' alt='aaaaaaa' />
+`;
 
-            <div class="feature">
-                <img src="https://lh6.googleusercontent.com/8vXaYq0Zv2iIrw4yOqutJHVWOWtBTOAYlJ3m3duaF-2rC8wmaY_0WqiuQSsiv7aLeGUrpPpfObJT4YZkTLGVjQ892N_lKj2YAVs3FlQ4G4xUlYH6jphBJLvmGsh3HuVekg=w1280" alt="Feature 3">
-                <h3>Excellent Practice for Other Competitions</h3>
-                <p>While most competitions are once a year, APOW is weekly and is excellent practice for major competitions like Astrigue, Astrochallenge, and of course SAO!</p>
-            </div>
-        </div>
+    function parseContent(raw) {
+      const lines = raw.split('\n');
+      const contentContainer = document.getElementById('content');
+      const nav = document.getElementById('sidebar-nav');
+      let html = '';
+      let navHTML = '';
+      let currentCategory = '';
+      let subIndex = 0;
 
-        <div class="stats">
-            <ul>
-                <li><strong>1,080</strong> Questions Attempted*</li>
-                <li><strong>501</strong> Correct Answers</li>
-                <li><strong>328</strong> Points Earned</li>
-                <li><strong>56</strong> Channel Followers</li>
-                <li><strong>22</strong> Total Participants</li>
-                <li><strong>10</strong> Most Submissions To A Set</li>
-            </ul>
-        </div>
+      lines.forEach(line => {
+        if (line.startsWith('> ')) {
+          currentCategory = line.replace('> ', '').trim();
+          navHTML += `<div class='mt-2 font-semibold'>${currentCategory}</div>`;
+        } else if (line.startsWith('>> ')) {
+          const sub = line.replace('>> ', '').trim();
+          const id = `section-${++subIndex}`;
+          navHTML += `<a href="#${id}" class="ml-2">${sub}</a>`;
+          html += `<h3 id="${id}" class="text-xl font-semibold mt-8 mb-2">${sub}</h3>`;
+        } else if (line.startsWith('# ')) {
+          const header = line.replace('# ', '').trim();
+          html += `<h1 class="text-3xl font-bold mt-6 mb-2">${header}</h1>`;
+        } else if (line.startsWith('<LUA>')) {
+          html += '<pre><code>';
+        } else if (line.startsWith('</LUA>')) {
+          html += '</code></pre>';
+        } else if (line.startsWith('<image')) {
+          const srcMatch = line.match(/src=['"](.*?)['"]/);
+          const altMatch = line.match(/alt=['"](.*?)['"]/);
+          const src = srcMatch ? srcMatch[1] : '';
+          const alt = altMatch ? altMatch[1] : '';
+          html += `<img src="${src}" alt="${alt}" class="rounded shadow-md my-4 max-w-md">`;
+        } else {
+          html += `<p class="mb-4">${line}</p>`;
+        }
+      });
 
-        <div class="pro-tips">
-            <h2>PRO TIPS</h2>
-            <ul>
-                <li>A lot of the non-calculation questions are not a direct recall, so you will have to break the question down. Often, you will need to use your brain to eliminate obvious fakes. This is a very important skill that comes with experience.</li>
-                <li>For the calculation questions, refer to your constant sheet and make sure your answer is logical.</li>
-                <li>APOWs are good practice for APOWs, so doing more sets will improve your scores in the future.</li>
-                <li>READ THE NOTES. There are tons of info if you know where to look, even if you lack knowledge in Astro.</li>
-            </ul>
-        </div>
-    </div>
+      contentContainer.innerHTML = html;
+      nav.innerHTML = navHTML;
+    }
+
+    parseContent(rawContent);
+  </script>
 </body>
+
 </html>
