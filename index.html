@@ -34,6 +34,40 @@
       color: #3b82f6;
       font-weight: bold;
     }
+
+    .callout {
+      position: fixed;
+      bottom: 35px;
+      right: 20px;
+      margin-left: 20px;
+      max-width: 300px;
+    }
+    
+    .callout-header {
+      padding: 25px 15px;
+      background: #555;
+      font-size: 30px;
+      color: white;
+    }
+    
+    .callout-container {
+      padding: 15px;
+      background-color: #ccc;
+      color: black
+    }
+    
+    .closebtn {
+      position: absolute;
+      top: 5px;
+      right: 15px;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+    }
+    
+    .closebtn:hover {
+      color: lightgrey;
+    }
   </style>
 </head>
 
@@ -57,6 +91,14 @@
     </main>
   </div>
 
+  <div class="callout">
+    <div class="callout-header">Callout Header</div>
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span>
+    <div class="callout-container">
+      <p>Some text to describe the callout message. <a href="#">Learn more</a> or close it if it is in your way.</p>
+    </div>
+  </div>
+
   <script>
     const rawContent = `
 > 1 Category
@@ -67,6 +109,33 @@ Brief content text
 local a = "b"
 </LUA>
 <image src='assets/unity.jpeg' alt='bl' />
+
+# 1 Syntax
+## 4.5 Literal & Variables
+Computers are designed to store and read values quickly and reliably. To take advantage of this, we will need to learn two types of instructions: one for assigning values and one for reading values.
+
+### Literals
+A <bold>literal</bold> is a value that is represented directly in source code.  
+
+Different types of values have different rules or <bold>syntax</bold> for how literals must be written.
+
+### Assigning Values
+
+To assign or keep a value in Python, we need a name(also known as identifier) as well as a corresponding value to be assigned.
+The equal symbol = is used, the syntax is as follows: 
+
+<LUA>
+variable_name = value
+</LUA>
+
+There are rules for naming a variable:
+1. Can contain uppercase or lowercase letters (A - Z, a - z)
+2. Can contain numbers (0 - 9) but cannot start with a number
+3. Can contain underscore symbol (_)
+4. Cannot contain any other characters (e.g. $ % # or a space)
+5. Cannot be of a reserved word that has special meaning in Python
+    <b><i>false, nil, local, true, break, while, end, etc</b></i>
+            
 `;
 
     function parseContent(raw) {
@@ -77,6 +146,7 @@ local a = "b"
       let navHTML = '';
       let currentCategory = '';
       let subIndex = 0;
+      let lastCatName = "start"
 
       lines.forEach(line => {
         if (line.startsWith('> ')) {
@@ -87,6 +157,12 @@ local a = "b"
           const id = `section-${++subIndex}`;
           navHTML += `<a href="#${id}" data-id="${id}" class="ml-4 text-sm text-gray-400 hover:text-white">${sub}</a>`;
           html += `<h3 id="${id}" class="text-xl font-semibold mt-8 mb-2 text-white">${sub}</h3>`;
+          lastCatName = sub;
+        } else if (line.startsWith('>>> ')) {
+          const sub = line.replace('>>> ', '').trim();
+          const id = `section-"${lastCatName}"-${++subIndex}`;
+          navHTML += `<a href="#${id}" data-id="${id}" class="ml-4 text-sm text-gray-400 hover:text-white">${sub}</a>`;
+          html += `<h4 id="${id}" class="text-xl font-semibold mt-8 mb-2 text-white">${sub}</h4>`;
         } else if (line.startsWith('# ')) {
           const header = line.replace('# ', '').trim();
           html += `<h1 class="text-3xl font-bold mt-6 mb-4 text-white">${header}</h1>`;
