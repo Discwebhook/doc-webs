@@ -10,6 +10,8 @@
   <style>
     body {
       font-family: 'Inter', sans-serif;
+      background-color: #111;
+      color: white;
     }
 
     pre code {
@@ -29,6 +31,7 @@
       padding: 0.5em 10px;
       quotes: "\201C""\201D""\2018""\2019";
     }
+
     blockquote:before {
       color: #ccc;
       content: open-quote;
@@ -37,6 +40,7 @@
       margin-right: 0.25em;
       vertical-align: -0.4em;
     }
+
     blockquote p {
       display: inline;
     }
@@ -54,154 +58,117 @@
       font-weight: bold;
     }
 
-    .callout {
+    .sidebar {
       position: fixed;
-      bottom: 35px;
-      right: 20px;
-      margin-left: 20px;
-      max-width: 300px;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 250px;
+      background-color: #1f1f1f;
+      padding: 20px;
+      border-right: 2px solid #333;
+      overflow-y: auto;
+      z-index: 100;
     }
-    
-    .callout-header {
-      padding: 25px 10px;
-      background: #555;
-      font-size: 30px;
-      color: white;
+
+    .sidebar h2 {
+      color: #fff;
+      margin-bottom: 20px;
     }
-    
-    .callout-container {
+
+    .sidebar a {
+      display: block;
+      color: #bbb;
+      margin-top: 8px;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .sidebar a:hover {
+      color: #fff;
+    }
+
+    .sidebar a.active {
+      color: #3b82f6;
+      font-weight: bold;
+    }
+
+    .doc-content {
+      margin-left: 270px;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .doc-content h1,
+    .doc-content h2,
+    .doc-content h3 {
+      margin-top: 20px;
+      color: #fff;
+    }
+
+    .doc-content p {
+      margin-bottom: 20px;
+      color: #ddd;
+    }
+
+    .lua-header {
+      background-color: #333;
+      color: #fff;
       padding: 10px;
-      background-color: #ccc;
-      color: black
+      font-size: 16px;
+      margin-top: 20px;
+      border-radius: 5px;
+      margin-bottom: 10px;
     }
-    
-    .closebtn {
-      position: absolute;
-      top: 5px;
-      right: 15px;
-      color: white;
-      font-size: 30px;
-      cursor: pointer;
-    }
-    
-    .closebtn:hover {
-      color: lightgrey;
+
+    .lua-block {
+      background-color: #1e1e1e;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-family: Consolas, monospace;
     }
   </style>
 </head>
 
-<body class="bg-gray-900 text-gray-100 min-h-screen">
+<body>
   <!-- Topbar -->
   <header class="bg-gray-800 px-6 py-4 shadow-md z-10">
     <h1 class="text-2xl font-bold text-white">My Language Docs</h1>
   </header>
 
   <div class="flex">
-    <aside class="w-64 bg-gray-800 p-6 h-screen overflow-y-auto border-r border-gray-700 sticky top-0">
-      <h2 class="text-lg font-semibold mb-4 text-white">Navigation</h2>
+    <aside class="sidebar">
+      <h2 class="text-lg font-semibold text-white">Navigation</h2>
       <nav id="sidebar-nav" class="space-y-1">
-        
+        <!-- Sidebar content will go here -->
       </nav>
     </aside>
-    
-    <main class="flex-1 p-8 doc-content" id="content">
+
+    <main class="flex-1 doc-content" id="content">
+      <!-- Document content will go here -->
     </main>
   </div>
 
-  <!--<div class="callout">
-    <div class="callout-header">Contact</div>
-    <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span>
-    <div class="callout-container">
-      <p>game.workspace.dj_nikov (Discord)
-Alconeyous_what (Roblox)</p>
-    </div>
-  </div>-->
-
   <script>
     const rawContent = `
+# 1. Lorem
+## 1.1 Ipsum
+Lorem ipsum dolor sit amet.
 
-# 1 Syntax
-## 4.5 Literal & Variables
-Computers are designed to store and read values quickly and reliably. To take advantage of this, we will need to learn two types of instructions: one for assigning values and one for reading values.
-
-### Literals
-A <bold>literal</bold> is a value that is represented directly in source code.  
-
-Different types of values have different rules or <bold>syntax</bold> for how literals must be written.
-
-### Assigning Values
-
-To assign or keep a value in Python, we need a name(also known as identifier) as well as a corresponding value to be assigned.
-The equal symbol = is used, the syntax is as follows: 
-
-<LUA>
-variable_name = value
+<LUA>$Title: Lua Example$
+local a = "Hello World"
+print(a)
 </LUA>
 
-There are rules for naming a variable:
-1. Can contain uppercase or lowercase letters (A - Z, a - z)
-2. Can contain numbers (0 - 9) but cannot start with a number
-3. Can contain underscore symbol (_)
-4. Cannot contain any other characters (e.g. $ % # or a space)
-5. Cannot be of a reserved word that has special meaning in Python
-    <b><i>false, nil, local, true, break, while, end, etc</b></i>
+### 1.1.1 Sub-Ipsum
+Another detail about Ipsum.
 
-<LUA>
-age = 15
-my_name = "Nikov"
-2A = 15            --start with number
-my country = "Singapore"  --contains a space
-cost$ = 5.80       --contains invalid special character
-repeat = true      --using a reserved word
+<LUA>$Title: Another Lua Example$
+local x = 10
+local y = 20
+print(x + y)
 </LUA>
-
-The Lua programming language supports multiple assignments:
-<LUA>
-apples, favorite = 5, "apples" -- assigns apples = 5, favorite = "apples"
-</LUA>
-
-<blockquote><p>It is worth noting that all the examples used so far are examples of global variables (variables which can be accessed from anywhere in the program). Local variables are created exactly in the same way as global variables, but they must be prefixed with the <code>local</code> keyword. Global variables generally serve no purpose inside Roblox Studio, as the _G variable is used for communication between scripts at the same context level. Assign variables normally using <code>local variable_name = value</code>. Intermediate examples as seen later will use this keyword.</p></blockquote>
-
-## Conditional Statments
-Conditional statements are instructions that check whether an expression is true and execute a certain piece of code if it is. If the expression is not true, they just skip over that piece of code and the program continues. In Roblox Studio, the only conditional statement uses the if instruction. False and nil are both considered as <code>false</code>, while everything else is considered as <code>true</code>.
-<LUA>
-local number = 6
-
-if number < 10 then
-	print("The number " .. number .. " is smaller than ten.")
-end
-
-print(if "" then true else false) --true in Roblox Studio, false in Python
-print(0 and true) --ditto
-print(true and "0") --This prints "0" instead of true
-print(0 == 4 and 0 or 1) --This prints 4
-</LUA>
-
-## Condition-controlled loops
-Condition-controlled loops are loops that are controlled by a condition. They will keep running it while the condition is true, or until the condition is false. Lua has two statements for condition-controlled loops: the while loop and the repeat loop. Each execution of the code is called an iteration. The difference between while and repeat loops is that repeat loops will check the condition at the end of the loop while while loops will check it at the start of the loop.
-
-<LUA>
-local number = 0
-
-while number < 10 do
-  print(number)
-  number += 1 -- Increase, or "increment" the value of number by 1
-end
-</LUA>
-The code above will print 0, then 1, then 2, then 3, and so on, until 9. After the tenth iteration, <code>number</code> will no longer be smaller than ten, and therefore the loop will stop executing.
-<LUA>
-local number = 0
-
-repeat
-	print(number)
-	number += 1
-until number >= 10
-</LUA>
-The code above will do exactly the same thing as the code that used a while loop above. The main difference is that, unlike while loops, where the condition is put between the while keyword and the do keyword, the condition is put at the end of the loop, after the until keyword. The repeat loop is the only statement in Lua that creates a block and that is not closed by the end keyword (instead, using <code>until</code>).
-
-Generally, <code>while</code> loops can be used instead of <code>repeat</code> regardless of the implementation.
-
-<image src='assets/unity.jpeg' alt='bl' />
 `;
 
     function parseContent(raw) {
@@ -216,7 +183,7 @@ Generally, <code>while</code> loops can be used instead of <code>repeat</code> r
 
       lines.forEach(line => {
         if (line.startsWith('# ')) {
-          currentCategory = line.replace('> ', '').trim();
+          currentCategory = line.replace('# ', '').trim();
           navHTML += `<div class='mt-4 text-sm font-bold text-white'>${currentCategory}</div>`;
           html += `<h1 id="header-${currentCategory}" class="text-xl font-semibold mt-8 mb-2 text-white">${currentCategory}</h1>`;
         } else if (line.startsWith('## ')) {
@@ -227,19 +194,15 @@ Generally, <code>while</code> loops can be used instead of <code>repeat</code> r
           lastCatName = sub;
         } else if (line.startsWith('### ')) {
           const sub = line.replace('### ', '').trim();
-          const id = `section-"${lastCatName}"-${++subIndex}`;
-          navHTML += `<a href="#${id}" data-id="${id}" class="ml-4 text-sm text-gray-400 hover:text-white">${sub}</a>`;
+          const id = `section-${lastCatName}-${++subIndex}`;
+          navHTML += `<a href="#${id}" data-id="${id}" class="ml-6 text-sm text-gray-400 hover:text-white">${sub}</a>`;
           html += `<h3 id="${id}" class="text-xl font-semibold mt-8 mb-2 text-white">${sub}</h3>`;
         } else if (line.startsWith('<LUA>')) {
-          html += '<pre><code>';
+          const titleMatch = line.match(/\$Title: (.*?)\$/);
+          const title = titleMatch ? titleMatch[1] : "Code Block";
+          html += `<div class="lua-header">${title}</div><div class="lua-block"><pre><code>`;
         } else if (line.startsWith('</LUA>')) {
-          html += '</code></pre>';
-        } else if (line.startsWith('<image')) {
-          const srcMatch = line.match(/src=['"](.*?)['"]/);
-          const altMatch = line.match(/alt=['"](.*?)['"]/);
-          const src = srcMatch ? srcMatch[1] : '';
-          const alt = altMatch ? altMatch[1] : '';
-          html += `<img src="${src}" alt="${alt}" class="rounded shadow-md my-4 max-w-md">`;
+          html += '</code></pre></div>';
         } else {
           html += `<p class="mb-4 text-gray-300">${line}</p>`;
         }
