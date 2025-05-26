@@ -34,10 +34,10 @@
     }
 
     .sidebar a.active {
-      color: #3b82f6;
-      font-weight: bold;
-      background-color: red !important;
+      color: #3b82f6 !important;
+      font-weight: bold !important;
     }
+
 
     .sidebar a {
       display: block;
@@ -75,7 +75,6 @@
 
 <body>
   <div class="flex min-h-screen">
-    <!-- Sidebar -->
     <aside class="w-64 bg-gray-900 p-6 overflow-y-auto border-r border-gray-800 sidebar sticky top-0 h-screen">
       <nav id="sidebar-nav" class="space-y-1"></nav>
     </aside>
@@ -163,7 +162,7 @@ greet()
         } else if (line.startsWith('## ')) {
           const subtitle = line.slice(3).trim();
           const id = `section-${sectionIndex++}`;
-          navHTML += `<a href="#${id}" class="block ml-4 text-sm text-gray-300 hover:bg-gray-800 rounded px-2 py-1">${subtitle}</a>`;
+          navHTML += `<a href="#${id}" class="block ml-4 text-sm hover:bg-gray-800 rounded px-2 py-1">${subtitle}</a>`;
           html += `<h2 id="${id}" class="text-xl font-semibold mt-12 mb-3">${subtitle}</h2>`;
         } else if (line.startsWith('<LUA>')) {
           inLuaBlock = true;
@@ -190,20 +189,26 @@ greet()
 
       const links = nav.querySelectorAll('a');
 
-      function updateActive() {
-        let fromTop = window.scrollY + 140;
-        links.forEach(link => {
-          const section = document.getElementById(link.getAttribute('href').substring(1));
-          if (!section) return;
+     function updateActive() {
+      let fromTop = window.scrollY + 140;
+      links.forEach(link => {
+        const section = document.getElementById(link.getAttribute('href').substring(1));
+        if (!section) return;
+    
+        const top = section.offsetTop;
+        const bottom = top + section.offsetHeight;
+        const isActive = fromTop >= top && fromTop < bottom;
+    
+        // Clear any previous highlight classes
+        link.classList.remove('text-blue-500', 'font-bold', 'bg-red-500');
+    
+        if (isActive) {
+          console.log("Link getting highlighted:", link.textContent);
+          link.classList.add('text-blue-500', 'font-bold', 'bg-red-500');
+        }
+      });
+    }
 
-          const top = section.offsetTop;
-          const bottom = top + section.offsetHeight;
-          if (fromTop >= top && fromTop < bottom) {
-            links.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-          }
-        });
-      }
 
       window.addEventListener('scroll', updateActive);
       updateActive();
