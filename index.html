@@ -1,276 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Language Docs</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Portfolio</title>
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #111;
-      color: white;
-      margin: 0;
-    }
+    <!-- Link to normalize.css (Optional but recommended) -->
+    <link rel="stylesheet" href="css/normalize.css">
 
-    h1, h2 {
-      scroll-margin-top: 120px;
-    }
+    <!-- Link to Skeleton CSS -->
+    <link rel="stylesheet" href="css/skeleton.css">
 
-    pre code {
-      display: block;
-      padding: 1rem;
-      background-color: #1e1e1e;
-      color: #d4d4d4;
-      font-family: Consolas, monospace;
-      border-radius: 0 0 0.5rem 0.5rem;
-      overflow-x: auto;
-    }
+    <!-- Link to your favicon -->
+    <link rel="icon" href="images/favicon.png">
 
-    .sidebar a.active {
-      color: #3b82f6 !important;
-      font-weight: bold !important;
-    }
-
-
-    .sidebar a {
-      display: block;
-      padding: 0.5rem;
-      border-radius: 0.375rem;
-      transition: background-color 0.2s;
-    }
-
-    .sidebar a:hover {
-      background-color: #2d2d2d;
-    }
-
-    .code-header {
-      background-color: #333;
-      padding: 0.5rem 1rem;
-      font-size: 0.875rem;
-      font-weight: 600;
-      border-top-left-radius: 0.5rem;
-      border-top-right-radius: 0.5rem;
-    }
-
-    .highlight-keyword {
-      color: #569CD6;
-    }
-
-    .highlight-core {
-      color: #4EC9B0;
-    }
-
-    .highlight-func {
-      color: #DCDCAA;
-    }
-  </style>
 </head>
-
 <body>
-  <div class="flex min-h-screen">
-    <aside class="w-64 bg-gray-900 p-6 overflow-y-auto border-r border-gray-800 sidebar sticky top-0 h-screen">
-      <nav id="sidebar-nav" class="space-y-1"></nav>
-    </aside>
 
-    <!-- Main Content -->
-    <main class="flex-1 p-8 doc-content" id="content"></main>
-  </div>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="container">
+            <nav>
+                <ul class="nav">
+                    <li><a href="#about">About Me</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-  <script>
-    const rawContent = `
-# 1 Syntax
-## 4.5 Literal & Variables
-Computers are designed to store and read values quickly and reliably. To take advantage of this, we will need to learn two types of instructions: one for assigning values and one for reading values.
+    <!-- About Me Section -->
+    <section id="about" class="container">
+        <h1>About Me</h1>
+        <p>My entry into the world of cybersecurity did not begin the conventional way...</p>
+    </section>
 
-### Literals
-A <bold>literal</bold> is a value that is represented directly in source code.  
+    <!-- Projects Section -->
+    <section id="projects" class="container">
+        <h1>Projects</h1>
+        <ul>
+            <li>Discord Bot Development</li>
+            <li>SimplePath Roblox Module</li>
+            <li>Rhyming Dictionary Project (SSEF)</li>
+        </ul>
+    </section>
 
-Different types of values have different rules or <bold>syntax</bold> for how literals must be written.
+    <!-- Experience Section -->
+    <section id="experience" class="container">
+        <h1>Experience</h1>
+        <p>I have experience with programming languages like C++, JavaScript, HTML, CSS, Lua, and Python...</p>
+    </section>
 
-### Assigning Values
+    <!-- Contact Section -->
+    <section id="contact" class="container">
+        <h1>Contact</h1>
+        <p>If you'd like to reach out, please send me an email at <a href="mailto:your.email@example.com">your.email@example.com</a>.</p>
+    </section>
 
-To assign or keep a value in Roblox Studio, we need a name(also known as identifier) as well as a corresponding value to be assigned.
-The equal symbol = is used, the syntax is as follows: 
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Your Name</p>
+        </div>
+    </footer>
 
-<LUA>
-variable_name = value
-</LUA>
-
-There are rules for naming a variable:
-1. Can contain uppercase or lowercase letters
-2. Can contain numbers (0 - 9) but cannot start with a number
-3. Can contain underscore symbol (_) or hyphen (-)
-4. Cannot contain any other characters (e.g. $ % # or a space)
-5. Cannot be of a reserved word that has special meaning in Python
-    <b><i>false, nil, local, true, break, while, end, etc</b></i>
-
-<LUA>
-age = 15
-my_name = "Nikov"
-2A = 15            --start with number
-my country = "Singapore"  --contains a space
-cost$ = 5.80       --contains invalid special character
-repeat = true      --using a reserved word
-</LUA>
-
-The Lua programming language supports multiple assignments:
-<LUA>
-apples, favorite = 5, "apples" -- assigns apples = 5, favorite = "apples"
-</LUA>
-
-<blockquote><p>It is worth noting that all the examples used so far are examples of global variables (variables which can be accessed from anywhere in the program). Local variables are created exactly in the same way as global variables, but they must be prefixed with the <code>local</code> keyword. Global variables generally serve no purpose inside Roblox Studio, as the _G variable is used for communication between scripts at the same context level. Assign variables normally using <code>local variable_name = value</code>. Intermediate examples as seen later will use this keyword.</p></blockquote>
-
-## Conditional Statments
-Conditional statements are instructions that check whether an expression is true and execute a certain piece of code if it is. If the expression is not true, they just skip over that piece of code and the program continues. In Roblox Studio, the only conditional statement uses the if instruction. False and nil are both considered as <code>false</code>, while everything else is considered as <code>true</code>.
-<LUA>
-local number = 6
-
-if number < 10 then
-	print("The number " .. number .. " is smaller than ten.")
-end
-
-print(if "" then true else false) --true in Roblox Studio, false in Python
-print(0 and true) --ditto
-print(true and "0") --This prints "0" instead of true
-print(0 == 4 and 0 or 1) --This prints 4
-</LUA>
-
-## Condition-controlled loops
-Condition-controlled loops are loops that are controlled by a condition. They will keep running it while the condition is true, or until the condition is false. Lua has two statements for condition-controlled loops: the while loop and the repeat loop. Each execution of the code is called an iteration. The difference between while and repeat loops is that repeat loops will check the condition at the end of the loop while while loops will check it at the start of the loop.
-
-<LUA>
-local number = 0
-
-while number < 10 do
-  print(number)
-  number += 1 -- Increase, or "increment" the value of number by 1
-end
-</LUA>
-The code above will print 0, then 1, then 2, then 3, and so on, until 9. After the tenth iteration, <code>number</code> will no longer be smaller than ten, and therefore the loop will stop executing.
-<LUA>
-local number = 0
-
-repeat
-	print(number)
-	number += 1
-until number >= 10
-</LUA>
-The code above will do exactly the same thing as the code that used a while loop above. The main difference is that, unlike while loops, where the condition is put between the while keyword and the do keyword, the condition is put at the end of the loop, after the until keyword. The repeat loop is the only statement in Lua that creates a block and that is not closed by the end keyword (instead, using <code>until</code>).
-
-Generally, <code>while</code> loops can be used instead of <code>repeat</code> regardless of the implementation.
-
-<image src='assets/unity.jpeg' alt='bl' />
-`;
-
-    let userFunctions = [];
-
-    function extractUserFunctions(code) {
-      const localFuncRegex = /local\s+function\s+([a-zA-Z_]\w*)/g;
-      const globalFuncRegex = /function\s+([a-zA-Z_]\w*)/g;
-      let match;
-      while ((match = localFuncRegex.exec(code))) userFunctions.push(match[1]);
-      while ((match = globalFuncRegex.exec(code))) userFunctions.push(match[1]);
-    }
-
-    function highlightLua(code) {
-      const keywords = ['local', 'function', 'if', 'then', 'end', 'for', 'in', 'do', 'return'];
-      const coreFunctions = ['Instance', 'print', 'pairs'];
-
-      keywords.forEach(k => {
-        code = code.replace(new RegExp(`\\b${k}\\b`, 'g'), `<span class="highlight-keyword">${k}</span>`);
-      });
-
-      coreFunctions.forEach(fn => {
-        code = code.replace(new RegExp(`\\b${fn}\\b`, 'g'), `<span class="highlight-core">${fn}</span>`);
-      });
-
-      userFunctions.forEach(fn => {
-        code = code.replace(new RegExp(`\\b${fn}\\b`, 'g'), `<span class="highlight-func">${fn}</span>`);
-      });
-
-      return code;
-    }
-
-    function parseContent(raw) {
-      const lines = raw.split('\n');
-      const contentContainer = document.getElementById('content');
-      const nav = document.getElementById('sidebar-nav');
-      let html = '';
-      let navHTML = '';
-      let sectionIndex = 0;
-      let luaBuffer = '';
-      let inLuaBlock = false;
-
-      lines.forEach(line => {
-        if (line.startsWith('# ')) {
-          const title = line.slice(2).trim();
-          const id = `section-${sectionIndex++}`;
-          navHTML += `<a href="#${id}" class="block text-white font-semibold hover:bg-gray-800 rounded px-2 py-1">${title}</a>`;
-          html += `<h1 id="${id}" class="text-2xl font-bold mt-16 mb-4">${title}</h1>`;
-        } else if (line.startsWith('## ')) {
-          const subtitle = line.slice(3).trim();
-          const id = `section-${sectionIndex++}`;
-          navHTML += `<a href="#${id}" class="block ml-4 text-sm hover:bg-gray-800 rounded px-2 py-1">${subtitle}</a>`;
-          html += `<h2 id="${id}" class="text-xl font-semibold mt-12 mb-3">${subtitle}</h2>`;
-        } else if (line.startsWith('<LUA>')) {
-          inLuaBlock = true;
-          luaBuffer = '';
-          const titleMatch = line.match(/<LUA>\$(.*?)\$/);
-          if (titleMatch) {
-            html += `<div class="my-4"><div class="code-header">${titleMatch[1]}</div><pre><code>`;
-          } else {
-            html += '<pre><code>';
-          }
-        } else if (line.startsWith('</LUA>')) {
-          extractUserFunctions(luaBuffer);
-          html += highlightLua(luaBuffer) + '</code></pre></div>';
-          inLuaBlock = false;
-        } else if (inLuaBlock) {
-          luaBuffer += line + '\n';
-        } else {
-          html += `<p class="mb-4 text-gray-300">${line}</p>`;
-        }
-      });
-
-      contentContainer.innerHTML = html;
-      nav.innerHTML = navHTML;
-
-      const links = nav.querySelectorAll('a');
-
-     function updateActive() {
-      let fromTop = window.scrollY + 140;
-      links.forEach(link => {
-        const section = document.getElementById(link.getAttribute('href').substring(1));
-        if (!section) return;
-    
-        const top = section.offsetTop;
-        const bottom = top + section.offsetHeight;
-        const isActive = fromTop >= top && fromTop < bottom;
-    
-        // Clear any previous highlight classes
-        link.classList.remove('text-blue-500', 'font-bold', 'bg-red-500');
-    
-        if (isActive) {
-          console.log("Link getting highlighted:", link.textContent);
-          link.classList.add('text-blue-500', 'font-bold', 'bg-red-500');
-        }
-      });
-    }
-
-
-      window.addEventListener('scroll', updateActive);
-      updateActive();
-    }
-
-    parseContent(rawContent);
-  </script>
 </body>
-
 </html>
