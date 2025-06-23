@@ -5,11 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Portfolio</title>
 
-    <!-- Link to normalize.css (Optional but recommended) -->
-    <link rel="stylesheet" href="css/normalize.css">
-
-    <!-- Link to Skeleton CSS -->
-    <link rel="stylesheet" href="css/skeleton.css">
+    <!-- Link to Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
 
     <!-- Link to your favicon -->
     <link rel="icon" href="images/favicon.png">
@@ -21,104 +18,93 @@
     <script>
         function toggleSidebar() {
             var sidebar = document.getElementById("sidebar");
-            sidebar.classList.toggle("active");
+            sidebar.classList.toggle("hidden");
         }
     </script>
 
 </head>
-<body>
+<body class="bg-gray-100">
 
     <!-- Sidebar Navigation -->
-    <div id="sidebar" class="sidebar">
+    <div id="sidebar" class="fixed top-0 left-0 h-full bg-gray-800 text-white w-64 p-5 hidden md:block">
         <nav>
             <ul>
-                <li><a href="#about" class="sidebar-link">About Me</a></li>
-                <li><a href="#projects" class="sidebar-link">Projects</a></li>
-                <li><a href="#experience" class="sidebar-link">Experience</a></li>
-                <li><a href="#contact" class="sidebar-link">Contact</a></li>
+                <li><a href="#about" class="block py-2">About Me</a></li>
+                <li><a href="#projects" class="block py-2">Projects</a></li>
+                <li><a href="#experience" class="block py-2">Experience</a></li>
+                <li><a href="#contact" class="block py-2">Contact</a></li>
             </ul>
         </nav>
     </div>
 
-    <!-- Hamburger Menu (Visible only on small screens) -->
-    <div class="hamburger-menu" onclick="toggleSidebar()">
+    <!-- Hamburger Menu (Visible on small screens) -->
+    <div class="md:hidden p-5 text-2xl text-gray-800" onclick="toggleSidebar()">
         &#9776; <!-- Hamburger Icon -->
     </div>
 
     <!-- Main Content Area -->
-    <div class="container">
-        <div class="row">
-            <div class="four columns">
-                <!-- Sidebar is placed on the left side of the screen -->
+    <div class="md:ml-64 container mx-auto px-4 py-8">
+
+        <!-- About Me Section -->
+        <section id="about" class="mb-8">
+            <h1 class="text-4xl font-bold text-gray-800">About Me</h1>
+            <p class="text-lg text-gray-700">My entry into the world of cybersecurity did not begin the conventional way...</p>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="mb-8">
+            <h1 class="text-4xl font-bold text-gray-800">Projects</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <p class="text-lg text-gray-700"><strong>Project 1:</strong> Discord Bot Development</p>
+                    <p class="text-lg text-gray-700"><strong>Project 2:</strong> SimplePath Roblox Module</p>
+                </div>
+                <div>
+                    <p class="text-lg text-gray-700"><strong>Project 3:</strong> Rhyming Dictionary (SSEF)</p>
+                </div>
             </div>
+            <p class="mt-4"><a href="https://github.com/your-github" class="bg-blue-500 text-white py-2 px-4 rounded">Star on GitHub</a></p>
+        </section>
 
-            <!-- Main Content Area -->
-            <div class="eight columns">
+        <!-- Experience Section -->
+        <section id="experience" class="mb-8">
+            <h1 class="text-4xl font-bold text-gray-800">Experience</h1>
+            <p class="text-lg text-gray-700">I have experience with <strong>programming languages</strong> like <code>C++</code>, <code>JavaScript</code>, <code>HTML</code>, <code>CSS</code>, <code>Lua</code>, and <code>Python</code>.</p>
+            <p class="text-lg text-gray-700"><em>Looking forward to more projects and learning in Cybersecurity!</em></p>
+        </section>
 
-                <!-- About Me Section -->
-                <section id="about">
-                    <h1>About Me</h1>
-                    <p>My entry into the world of cybersecurity did not begin the conventional way...</p>
-                </section>
-
-                <!-- Projects Section -->
-                <section id="projects">
-                    <h1>Projects</h1>
-                    <div class="row">
-                        <div class="six columns">
-                            <p><strong>Project 1:</strong> Discord Bot Development</p>
-                            <p><strong>Project 2:</strong> SimplePath Roblox Module</p>
-                        </div>
-                        <div class="six columns">
-                            <p><strong>Project 3:</strong> Rhyming Dictionary (SSEF)</p>
-                        </div>
+        <!-- Contact Form Section -->
+        <section id="contact" class="mb-8">
+            <h1 class="text-4xl font-bold text-gray-800">Contact</h1>
+            <form>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="exampleEmailInput" class="block text-lg text-gray-700">Your Email</label>
+                        <input class="w-full p-2 border border-gray-300 rounded" type="email" placeholder="test@mailbox.com" id="exampleEmailInput">
                     </div>
-                    <p>Check out my GitHub: <a href="https://github.com/your-github" class="button">Star on GitHub</a></p>
-                </section>
+                    <div>
+                        <label for="exampleRecipientInput" class="block text-lg text-gray-700">Reason for Contacting</label>
+                        <select class="w-full p-2 border border-gray-300 rounded" id="exampleRecipientInput">
+                            <option value="Questions">Questions</option>
+                            <option value="Admiration">Admiration</option>
+                            <option value="Can I get your number?">Can I get your number?</option>
+                        </select>
+                    </div>
+                </div>
+                <label for="exampleMessage" class="block text-lg text-gray-700">Message</label>
+                <textarea class="w-full p-2 border border-gray-300 rounded" placeholder="Hi, I have a question…" id="exampleMessage"></textarea>
+                <div class="flex items-center mt-4">
+                    <input type="checkbox" class="mr-2">
+                    <span class="text-gray-700">Send a copy to yourself</span>
+                </div>
+                <button type="submit" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded">Submit</button>
+            </form>
+        </section>
 
-                <!-- Experience Section -->
-                <section id="experience">
-                    <h1>Experience</h1>
-                    <p>I have experience with <strong>programming languages</strong> like <code>C++</code>, <code>JavaScript</code>, <code>HTML</code>, <code>CSS</code>, <code>Lua</code>, and <code>Python</code>.</p>
-                    <p><em>Looking forward to more projects and learning in Cybersecurity!</em></p>
-                </section>
-
-                <!-- Contact Form Section -->
-                <section id="contact">
-                    <h1>Contact</h1>
-                    <form>
-                        <div class="row">
-                            <div class="six columns">
-                                <label for="exampleEmailInput">Your Email</label>
-                                <input class="u-full-width" type="email" placeholder="test@mailbox.com" id="exampleEmailInput">
-                            </div>
-                            <div class="six columns">
-                                <label for="exampleRecipientInput">Reason for Contacting</label>
-                                <select class="u-full-width" id="exampleRecipientInput">
-                                    <option value="Questions">Questions</option>
-                                    <option value="Admiration">Admiration</option>
-                                    <option value="Can I get your number?">Can I get your number?</option>
-                                </select>
-                            </div>
-                        </div>
-                        <label for="exampleMessage">Message</label>
-                        <textarea class="u-full-width" placeholder="Hi, I have a question…" id="exampleMessage"></textarea>
-                        <label class="example-send-yourself-copy">
-                            <input type="checkbox">
-                            <span class="label-body">Send a copy to yourself</span>
-                        </label>
-                        <input class="button-primary" type="submit" value="Submit">
-                    </form>
-                </section>
-
-            </div>
-        </div>
     </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Your Name</p>
-        </div>
+    <footer class="bg-gray-800 text-white text-center py-4">
+        <p>&copy; 2025 Your Name</p>
     </footer>
 
 </body>
