@@ -14,16 +14,32 @@
     <!-- Custom Styles -->
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Add a little custom script to toggle the sidebar -->
+    <!-- Add a little custom script to toggle the sidebar and dark mode -->
     <script>
+        // Toggle Sidebar
         function toggleSidebar() {
             var sidebar = document.getElementById("sidebar");
             sidebar.classList.toggle("hidden");
         }
+
+        // Toggle Dark Mode
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+
+        // Initialize dark mode based on user's preference
+        if (localStorage.getItem("theme") === "dark") {
+            document.documentElement.classList.add("dark");
+        }
     </script>
 
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
+
+    <!-- Dark Mode Toggle Button -->
+    <button onclick="toggleDarkMode()" class="fixed top-5 right-5 bg-gray-800 text-white p-3 rounded-full">
+        🌙
+    </button>
 
     <!-- Sidebar Navigation -->
     <div id="sidebar" class="fixed top-0 left-0 h-full bg-gray-800 text-white w-64 p-5 hidden md:block">
@@ -47,20 +63,20 @@
 
         <!-- About Me Section -->
         <section id="about" class="mb-8">
-            <h1 class="text-4xl font-bold text-gray-800">About Me</h1>
-            <p class="text-lg text-gray-700">My entry into the world of cybersecurity did not begin the conventional way...</p>
+            <h1 class="text-4xl font-bold text-gray-800 dark:text-white">About Me</h1>
+            <p class="text-lg text-gray-700 dark:text-gray-300">My entry into the world of cybersecurity did not begin the conventional way...</p>
         </section>
 
         <!-- Projects Section -->
         <section id="projects" class="mb-8">
-            <h1 class="text-4xl font-bold text-gray-800">Projects</h1>
+            <h1 class="text-4xl font-bold text-gray-800 dark:text-white">Projects</h1>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <p class="text-lg text-gray-700"><strong>Project 1:</strong> Discord Bot Development</p>
-                    <p class="text-lg text-gray-700"><strong>Project 2:</strong> SimplePath Roblox Module</p>
+                    <p class="text-lg text-gray-700 dark:text-gray-300"><strong>Project 1:</strong> Discord Bot Development</p>
+                    <p class="text-lg text-gray-700 dark:text-gray-300"><strong>Project 2:</strong> SimplePath Roblox Module</p>
                 </div>
                 <div>
-                    <p class="text-lg text-gray-700"><strong>Project 3:</strong> Rhyming Dictionary (SSEF)</p>
+                    <p class="text-lg text-gray-700 dark:text-gray-300"><strong>Project 3:</strong> Rhyming Dictionary (SSEF)</p>
                 </div>
             </div>
             <p class="mt-4"><a href="https://github.com/your-github" class="bg-blue-500 text-white py-2 px-4 rounded">Star on GitHub</a></p>
@@ -68,22 +84,22 @@
 
         <!-- Experience Section -->
         <section id="experience" class="mb-8">
-            <h1 class="text-4xl font-bold text-gray-800">Experience</h1>
-            <p class="text-lg text-gray-700">I have experience with <strong>programming languages</strong> like <code>C++</code>, <code>JavaScript</code>, <code>HTML</code>, <code>CSS</code>, <code>Lua</code>, and <code>Python</code>.</p>
-            <p class="text-lg text-gray-700"><em>Looking forward to more projects and learning in Cybersecurity!</em></p>
+            <h1 class="text-4xl font-bold text-gray-800 dark:text-white">Experience</h1>
+            <p class="text-lg text-gray-700 dark:text-gray-300">I have experience with <strong>programming languages</strong> like <code>C++</code>, <code>JavaScript</code>, <code>HTML</code>, <code>CSS</code>, <code>Lua</code>, and <code>Python</code>.</p>
+            <p class="text-lg text-gray-700 dark:text-gray-300"><em>Looking forward to more projects and learning in Cybersecurity!</em></p>
         </section>
 
         <!-- Contact Form Section -->
         <section id="contact" class="mb-8">
-            <h1 class="text-4xl font-bold text-gray-800">Contact</h1>
-            <form>
+            <h1 class="text-4xl font-bold text-gray-800 dark:text-white">Contact</h1>
+            <form id="contact-form">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="exampleEmailInput" class="block text-lg text-gray-700">Your Email</label>
+                        <label for="exampleEmailInput" class="block text-lg text-gray-700 dark:text-gray-300">Your Email</label>
                         <input class="w-full p-2 border border-gray-300 rounded" type="email" placeholder="test@mailbox.com" id="exampleEmailInput">
                     </div>
                     <div>
-                        <label for="exampleRecipientInput" class="block text-lg text-gray-700">Reason for Contacting</label>
+                        <label for="exampleRecipientInput" class="block text-lg text-gray-700 dark:text-gray-300">Reason for Contacting</label>
                         <select class="w-full p-2 border border-gray-300 rounded" id="exampleRecipientInput">
                             <option value="Questions">Questions</option>
                             <option value="Admiration">Admiration</option>
@@ -91,11 +107,11 @@
                         </select>
                     </div>
                 </div>
-                <label for="exampleMessage" class="block text-lg text-gray-700">Message</label>
+                <label for="exampleMessage" class="block text-lg text-gray-700 dark:text-gray-300">Message</label>
                 <textarea class="w-full p-2 border border-gray-300 rounded" placeholder="Hi, I have a question…" id="exampleMessage"></textarea>
                 <div class="flex items-center mt-4">
                     <input type="checkbox" class="mr-2">
-                    <span class="text-gray-700">Send a copy to yourself</span>
+                    <span class="text-gray-700 dark:text-gray-300">Send a copy to yourself</span>
                 </div>
                 <button type="submit" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded">Submit</button>
             </form>
@@ -107,5 +123,17 @@
         <p>&copy; 2025 Your Name</p>
     </footer>
 
+    <!-- EmailJS Script -->
+    <script type="text/javascript">
+        document.getElementById("contact-form").addEventListener("submit", function(event){
+            event.preventDefault();
+            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+                .then(function(response) {
+                    alert('Message sent successfully!');
+                }, function(error) {
+                    alert('Failed to send message. Please try again.');
+                });
+        });
+    </script>
 </body>
 </html>
