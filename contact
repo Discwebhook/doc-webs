@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Your Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" href="images/favicon.png">
+</head>
+<body class="bg-gray-900 text-white">
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="fixed top-0 left-0 h-full w-64 p-5 transition-all duration-300 ease-in-out z-50 transform -translate-x-full md:translate-x-0">
+        <nav>
+            <ul class="mt-5">
+                <li><a href="about.html" class="block py-2 px-4 transition-colors duration-200 hover:bg-gray-700">About Me</a></li>
+                <li><a href="projects.html" class="block py-2 px-4 transition-colors duration-200 hover:bg-gray-700">Projects</a></li>
+                <li><a href="experience.html" class="block py-2 px-4 transition-colors duration-200 hover:bg-gray-700">Experience</a></li>
+                <li><a href="contact.html" class="block py-2 px-4 transition-colors duration-200 hover:bg-gray-700">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="md:ml-64 container mx-auto px-4 py-8">
+        <section id="contact" class="mb-8">
+            <h1 class="text-4xl font-bold text-yellow-400 mb-4">Contact</h1>
+            <form>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="exampleRecipientInput" class="block text-lg text-gray-300">Reason for Contacting</label>
+                        <select class="w-full p-2 border border-gray-300 rounded" id="exampleRecipientInput">
+                            <option value="Questions">Questions</option>
+                            <option value="Admiration">Feedback</option>
+                            <option value="Can I get your number?">Can I get your number?</option>
+                        </select>
+                    </div>
+                </div>
+                <label for="exampleMessage" class="block text-lg text-gray-300">Message</label>
+                <textarea class="w-full p-2 border border-gray-300 rounded" placeholder="Hi, I have a question…" id="exampleMessage"></textarea>
+                
+                <a href="mailto:your-email@example.com?subject=Contact%20Form%20Message&body=Reason:%20[Reason]%0AMessage:%20[Message]" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded text-center">
+                    Send Message
+                </a>
+            </form>
+        </section>
+    </div>
+
+    <footer class="bg-gray-800 text-white text-center py-4">
+        <p>&copy; 2025 Your Name</p>
+    </footer>
+</body>
+</html>
