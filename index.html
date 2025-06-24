@@ -53,6 +53,7 @@
 
     <!-- Sidebar Overlay -->
     <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+
     
     <!-- Main Content Area -->
     <div class="md:ml-64 container mx-auto px-4 py-8">
@@ -122,32 +123,30 @@
         <p>&copy; 2025 Your Name</p>
     </footer>
 
-    <script>
-        // Toggle Sidebar
-        function toggleSidebar() {
-            var sidebar = document.getElementById("sidebar");
-            var overlay = document.getElementById("sidebar-overlay");
-            sidebar.classList.toggle("-translate-x-full");
-            overlay.classList.toggle("hidden");
-        }
-
-        // Close sidebar when overlay is clicked
-        document.getElementById("sidebar-overlay").addEventListener("click", function() {
-            toggleSidebar();
-        });
-
-        // Toggle Sidebar Expand/Contract
-        function toggleSidebarSize() {
-            var sidebar = document.getElementById("sidebar");
-            var toggleIcon = document.querySelector("#sidebar button");
-            sidebar.classList.toggle("w-64");
-            sidebar.classList.toggle("w-16");
-            if (sidebar.classList.contains("w-64")) {
-                toggleIcon.innerHTML = '&#9776;'; // Expand icon
-            } else {
-                toggleIcon.innerHTML = '&#10005;'; // Collapse icon
+    <!-- Add a script for toggling the sidebar visibility -->
+        <script>
+            // Toggle Sidebar
+            function toggleSidebar() {
+                var sidebar = document.getElementById("sidebar");
+                var items = document.querySelectorAll('#sidebar li');
+                // Toggle the sidebar's visibility and shrink it
+                sidebar.classList.toggle("transform");
+                sidebar.classList.toggle("translate-x-0");
+                sidebar.classList.toggle("translate-x-[-100%]");
+                
+                // Loop through all sidebar items and toggle visibility when sidebar is collapsed
+                items.forEach(function(item) {
+                    item.classList.toggle("hidden");
+                });
+        
+                // Toggle hamburger icon change
+                var icon = document.getElementById("toggle-sidebar");
+                if (sidebar.classList.contains("translate-x-0")) {
+                    icon.innerHTML = "&#10006;";  // Change to close icon (X)
+                } else {
+                    icon.innerHTML = "&#9776;";  // Hamburger icon
+                }
             }
-        }
-    </script>
+        </script>
 </body>
 </html>
