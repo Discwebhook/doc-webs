@@ -1,61 +1,53 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Portfolio</title>
-
-    <!-- Link to Tailwind CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
-
-    <!-- Link to your favicon -->
+    <title>About Me - Your Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="icon" href="images/favicon.png">
-
-    <!-- Custom Styles -->
     <style>
-        /* Dynamic gradient animation for sidebar */
-        @keyframes gradientAnimation {
+        /* Optional: Add gradient animation */
+        @keyframes gradientShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-
-        #sidebar {
-            background: linear-gradient(45deg, #ff6a00, #ee0979, #ffb94f);
-            background-size: 400% 400%;
-            animation: gradientAnimation 15s ease infinite;
+        .animated-gradient {
+            background: linear-gradient(270deg, #1e3a8a, #9333ea, #10b981);
+            background-size: 600% 600%;
+            animation: gradientShift 15s ease infinite;
         }
     </style>
 </head>
 <body class="bg-gray-900 text-white">
 
-    <!-- Sidebar Overlay -->
-    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
-    
-    <!-- Sidebar -->
-    <div id="sidebar" class="fixed top-0 left-0 h-full w-64 p-5 transition-all duration-300 ease-in-out z-50 transform -translate-x-full md:translate-x-0">
-        <!-- Hamburger Icon on Sidebar -->
-        <div class="flex justify-end">
-            <button class="text-white text-2xl" onclick="toggleSidebarSize()">
-                &#9776; <!-- Hamburger Icon -->
-            </button>
-        </div>
+    <!-- Overlay -->
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden" onclick="toggleSidebar()"></div>
 
+    <!-- Sidebar -->
+    <div id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-gray-800 p-5 transition-all duration-300 z-50 transform -translate-x-full md:translate-x-0 animated-gradient">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold text-white">Menu</h2>
+            <button onclick="toggleSidebar()" class="text-white md:hidden text-2xl">&times;</button>
+        </div>
         <nav>
-            <ul class="mt-5">
-                <li><a href="about.html" class="block py-2 px-4 transition-colors duration-200 hover:bg-gray-700">About Me</a></li>
-                <li><a href="projects.html" class="block py-2 px-4 transition-colors duration-200 hover:bg-gray-700">Projects</a></li>
-                <li><a href="experience.html" class="block py-2 px-4 transition-colors duration-200 hover:bg-gray-700">Experience</a></li>
-                <li><a href="contact.html" class="block py-2 px-4 transition-colors duration-200 hover:bg-gray-700">Contact</a></li>
+            <ul>
+                <li><a href="index.html" class="block py-2 px-4 hover:bg-gray-700 rounded">About Me</a></li>
+                <li><a href="projects.html" class="block py-2 px-4 hover:bg-gray-700 rounded">Projects</a></li>
+                <li><a href="experience.html" class="block py-2 px-4 hover:bg-gray-700 rounded">Experience</a></li>
+                <li><a href="contact.html" class="block py-2 px-4 hover:bg-gray-700 rounded">Contact</a></li>
             </ul>
         </nav>
     </div>
 
-    <!-- Sidebar Overlay -->
-    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+    <!-- Hamburger Button -->
+    <button onclick="toggleSidebar()" class="fixed top-5 left-5 z-50 md:hidden text-white text-3xl bg-gray-700 p-2 rounded shadow">
+        &#9776;
+    </button>
 
-    
-    <!-- Main Content Area -->
+    <!-- Main Content -->
     <div class="md:ml-64 container mx-auto px-4 py-8">
         <section id="about" class="mb-8">
             <h1 class="text-4xl font-bold text-yellow-400 mb-4">About Me</h1>
@@ -123,30 +115,17 @@
         <p>&copy; 2025 Your Name</p>
     </footer>
 
-    <!-- Add a script for toggling the sidebar visibility -->
-        <script>
-            // Toggle Sidebar
-            function toggleSidebar() {
-                var sidebar = document.getElementById("sidebar");
-                var items = document.querySelectorAll('#sidebar li');
-                // Toggle the sidebar's visibility and shrink it
-                sidebar.classList.toggle("transform");
-                sidebar.classList.toggle("translate-x-0");
-                sidebar.classList.toggle("translate-x-[-100%]");
-                
-                // Loop through all sidebar items and toggle visibility when sidebar is collapsed
-                items.forEach(function(item) {
-                    item.classList.toggle("hidden");
-                });
-        
-                // Toggle hamburger icon change
-                var icon = document.getElementById("toggle-sidebar");
-                if (sidebar.classList.contains("translate-x-0")) {
-                    icon.innerHTML = "&#10006;";  // Change to close icon (X)
-                } else {
-                    icon.innerHTML = "&#9776;";  // Hamburger icon
-                }
-            }
-        </script>
+    <!-- JavaScript -->
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const isOpen = sidebar.classList.contains('translate-x-0');
+
+            sidebar.classList.toggle('-translate-x-full');
+            sidebar.classList.toggle('translate-x-0');
+            overlay.classList.toggle('hidden');
+        }
+    </script>
 </body>
 </html>
