@@ -42,10 +42,15 @@
   <div id="terminal" class="fixed inset-0 z-50 flex flex-col items-center justify-center px-4 transition-transform duration-700 ease-in-out">
     <div class="bg-black bg-opacity-70 border border-gray-700 backdrop-blur-sm rounded-md p-8 max-w-2xl w-full shadow-2xl">
       <div class="text-green-400 font-mono mb-4">/usr/portfolio~$ <span id="cursor">|</span></div>
-      <div id="output" class="text-green-300 font-mono text-sm leading-relaxed space-y-1 animate-typewriter overflow-hidden border-l-4 pl-3 border-green-400">
+       
+      <div id="boot-animation" class="text-green-300 font-mono text-sm leading-relaxed space-y-1 animate-typewriter overflow-hidden border-l-4 pl-3 border-green-400">
         <p>Booting portfolio...</p>
         <p>Ready for command. Scroll to exit.</p>
       </div>
+      
+      <!-- CLI output block -->
+      <div id="output" class="text-green-300 font-mono text-sm leading-relaxed space-y-1 border-l-4 pl-3 border-green-400 hidden"></div>
+
       <input id="cmdInput" type="text"
         class="mt-4 w-full bg-transparent border-none text-green-300 font-mono focus:outline-none"
         placeholder="Type command..." autofocus />
@@ -202,7 +207,7 @@
             resp = `'${cmd}' is not recognized.`;
         }
         if (resp) {
-          out.innerHTML += `<p>${resp}</p>`;
+          out.innerHTML += `<p>>> ${cmd}</p><p>${resp}</p>`;
           out.scrollTop = out.scrollHeight;
         }
         this.value = '';
@@ -223,11 +228,14 @@
     document.getElementById('cli-input').focus();
   }
   
-  setTimeout(() => {
+    setTimeout(() => {
     document.getElementById('boot-animation').classList.add('hidden');
-    document.getElementById('cli-active').classList.remove('hidden');
-    enableInput();
+    const outputEl = document.getElementById('output');
+    outputEl.classList.remove('hidden');
+    outputEl.innerHTML += `<p>System ready. Enter a command.</p>`;
+    document.getElementById('cmdInput').focus();
   }, 4000);
+
   </script>
 </body>
 </html>
