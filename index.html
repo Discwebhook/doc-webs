@@ -39,7 +39,7 @@
   </aside>
 
   <!-- Hamburger Button -->
-  <button onclick="openSidebar()" class="fixed top-4 left-4 z-50 text-white text-3xl bg-gray-700 p-2 rounded shadow hover:bg-gray-600 md:hidden">
+  <button onclick="openSidebar()" class="fixed top-4 left-4 z-50 text-white text-3xl bg-gray-700 p-2 rounded shadow hover:bg-gray-600">
     &#9776;
   </button>
 
@@ -114,18 +114,43 @@
 
   <!-- Script -->
   <script>
-    function openSidebar() {
-      document.getElementById('sidebar').classList.remove('-translate-x-full');
-      document.getElementById('overlay').classList.remove('hidden');
-      document.body.classList.add('overflow-hidden');
-    }
+  function openSidebar() {
+    document.getElementById('sidebar').classList.remove('-translate-x-full');
+    document.getElementById('overlay').classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
+    document.getElementById('hamburgerBtn').classList.add('hidden');
+    localStorage.setItem('sidebarOpen', 'true');
+  }
 
-    function closeSidebar() {
-      document.getElementById('sidebar').classList.add('-translate-x-full');
-      document.getElementById('overlay').classList.add('hidden');
+  function closeSidebar() {
+    document.getElementById('sidebar').classList.add('-translate-x-full');
+    document.getElementById('overlay').classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
+    document.getElementById('hamburgerBtn').classList.remove('hidden');
+    localStorage.setItem('sidebarOpen', 'false');
+  }
+
+  // Restore sidebar state on load
+  window.addEventListener('DOMContentLoaded', () => {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const hamburger = document.getElementById('hamburgerBtn');
+    const isOpen = localStorage.getItem('sidebarOpen') === 'true';
+
+    if (isOpen) {
+      sidebar.classList.remove('-translate-x-full');
+      overlay.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+      hamburger.classList.add('hidden');
+    } else {
+      sidebar.classList.add('-translate-x-full');
+      overlay.classList.add('hidden');
       document.body.classList.remove('overflow-hidden');
+      hamburger.classList.remove('hidden');
     }
-  </script>
+  });
+</script>
+
     <!-- Main Content -->
 </body>
 </html>
