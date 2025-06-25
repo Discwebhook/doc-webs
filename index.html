@@ -84,22 +84,28 @@
 
   <!-- Main Content -->
   <div class="md:ml-64 container mx-auto px-4 py-8">
-    <section id="about" class="mb-8">
-          <h1 class="text-4xl font-bold text-yellow-400 mb-4">About Me</h1>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                  <p class="text-lg text-gray-300">Hi! I’m Mun Zhong. I’m passionate about learning new things, especially in programming and digital forensics. I especially enjoy tackling challenges through hands-on projects. I also arrange sheet music and play the guitar during my free time. I’m always eager to grow my skills and connect with others with similar interest.</p>
-              </div>
-              <div>
-                  <img src="images/Zhong.webp" alt="PFP" class="h-48 w-auto rounded-lg mb-6 md:mb-0 md:mr-7 object-cover" class="rounded-lg shadow-lg w-full h-auto">
-              </div>
-          </div>
-        </section>
+    <section id="about" class="mb-8 transition-transform duration-700 transform hover:-translate-y-1">
+      <h1 class="text-5xl font-extrabold text-yellow-400 mb-2">About Me</h1>
+      <div class="flex flex-col-reverse md:flex-row items-center gap-8">
+        <div class="md:w-1/2">
+          <p class="text-lg text-gray-300 leading-relaxed">
+            I’m passionate about <span class="text-yellow-400 font-semibold">programming</span> and 
+            <span class="text-yellow-400 font-semibold">digital forensics</span>. I especially enjoy tackling challenges through hands-on projects. I also arrange sheet music and play the guitar during my free time. I'm always excited to learn/conenct with others.
+          </p>
+          <a href="#projects" class="inline-block mt-6 px-6 py-2 bg-yellow-500 text-black font-bold rounded hover:bg-yellow-400 transition">
+            View My Projects ↓
+          </a>
+        </div>
+        <div class="md:w-1/2">
+          <img src="images/Zhong.webp" alt="PFP" class="rounded-xl shadow-2xl object-cover w-full max-w-xs mx-auto">
+        </div>
+      </div>
+    </section>
 
-        <section id="projects" class="relative mb-8 overflow-hidden">
+        <section id="projects" class="relative mb-8 overflow-hidden bg-[#080c14] min-h-[500px]">
           <!--Long wave line SVG-->
             <svg 
-                class="absolute top-0 left-0 w-full h-[320px] -z-10 rotate-180" 
+                class="absolute bottom-0 left-0 w-full h-[320px] -z-10 rotate-180" 
                 viewBox="0 0 1440 320" 
                 fill="none" 
                 xmlns="http://www.w3.org/2000/svg"
