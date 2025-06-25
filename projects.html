@@ -1,49 +1,147 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects - Your Portfolio</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="icon" href="images/favicon.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Me - Your Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+  <link rel="icon" href="images/favicon.png">
+  <style>
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .animated-gradient {
+      background: linear-gradient(270deg, #1e3a8a, #9333ea, #10b981);
+      background-size: 600% 600%;
+      animation: gradientShift 15s ease infinite;
+    }
+    /* Typewriter */
+    @keyframes typewriter { from{width:0} to{width:100%}}
+    .animate-typewriter p {
+      width:100%; white-space:nowrap; overflow:hidden;
+      border-right:2px solid limegreen;
+      animation:typewriter 3s steps(40) 1 both;
+    }
+    .animate-typewriter p:nth-child(2){animation-delay:.5s;}
+    .animate-typewriter p:nth-child(3){animation-delay:1s;}
+    .animate-typewriter p:nth-child(4){animation-delay:1.5s;}
+    .animate-typewriter p:nth-child(5){animation-delay:2s;border-right:none;}
+  </style>
 </head>
-<body class="bg-gray-900 text-white">
+<body class="bg-gray-900 text-white overflow-x-hidden">
 
-    <!-- Sidebar -->
-    <div id="sidebar" class="fixed top-0 left-0 h-full w-64 p-5 transition-all duration-300 ease-in-out z-50 transform -translate-x-full md:translate-x-0">
-        <nav>
-            <ul class="mt-5">
-                <li><a href="about.html" class="block py-2 px-4 transition-colors duration-200 hover:bg-gray-700">About Me</a></li>
-                <li><a href="projects.html" class="block py-2 px-4 transition-colors duration-200 hover:bg-gray-700">Projects</a></li>
-                <li><a href="experience.html" class="block py-2 px-4 transition-colors duration-200 hover:bg-gray-700">Experience</a></li>
-                <li><a href="contact.html" class="block py-2 px-4 transition-colors duration-200 hover:bg-gray-700">Contact</a></li>
-            </ul>
-        </nav>
+  <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div>
+
+    <aside id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-gray-800 p-6 z-50 transform -translate-x-full transition-transform duration-300 ease-in-out animated-gradient">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-xl font-bold">Menu</h2>
+      <button onclick="closeSidebar()" class="text-white text-2xl">&times;</button>
     </div>
+    <nav>
+      <ul class="space-y-2">
+        <li><a href="index.html" class="block py-2 px-4 hover:bg-gray-700 rounded">About Me</a></li>
+        <li><a href="projects.html" class="block py-2 px-4 hover:bg-gray-700 rounded">Projects</a></li>
+        <li><a href="experience.html" class="block py-2 px-4 hover:bg-gray-700 rounded">Experience</a></li>
+      </ul>
+    </nav>
+  </aside>
+  
+  <button onclick="openSidebar()" id="hamburgerBtn" class="fixed top-4 left-4 z-50 text-white text-3xl bg-gray-700 p-2 rounded shadow hover:bg-gray-600">
+    &#9776;
+  </button>
 
-    <!-- Main Content -->
-    <div class="md:ml-64 container mx-auto px-4 py-8">
-        <section id="projects" class="mb-8">
-            <h1 class="text-4xl font-bold text-yellow-400 mb-4">Projects</h1>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                    <h3 class="text-2xl font-bold text-yellow-500 mb-2">Discord Bot Development</h3>
-                    <p class="text-lg text-gray-300">A bot that helps manage communities and adds fun features to Discord servers. It handles automatic moderation, message responses, and more.</p>
+  <div class="md:ml-64 container mx-auto px-4 py-8">
+     <section id="projects" class="relative mb-8 overflow-hidden bg-[#080c14] min-h-[500px]">
+          <!--Long wave line SVG-->
+            <svg 
+                class="absolute bottom-0 left-0 w-full h-[320px] -z-10 rotate-180" 
+                viewBox="0 0 1440 320" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="none"
+              >
+
+
+            <path fill="#0a0f1a" fill-opacity="0.8" d="M0,160 C360,200 1080,120 1440,160 L1440,320 L0,320 Z"/>
+            <path fill="#1f2937" fill-opacity="0.9" d="M0,200 C360,240 1080,160 1440,200 L1440,320 L0,320 Z"/>
+          </svg>
+          
+          <h1 class="text-4xl font-bold text-yellow-400 mb-4 relative z-10">Projects</h1>
+          <p class="text-lg text-yellow-200 mb-4 relative z-10">Some of my past year projects</p>
+          
+          <div class="space-y-8 relative z-10">
+            <div class="bg-gray-800 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 p-4 md:flex">
+                    <img src="images/scrn3d.png" alt="Screen3d-image" class="h-48 w-auto rounded-lg mb-4 md:mb-0 md:mr-6 object-cover">
+                    <div>
+                        <h3 class="text-2xl font-bold text-yellow-500 mb-2">Screen3D</h3>
+                        <p class="text-lg text-gray-300">A Roblox community resource that allows for the creation of 3D UI with 2D UI components, without the hassle of .RenderStepped loops, or arbitrary offsets, or annoying UI resizing issues.</p>
+                    </div>
                 </div>
-                <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                    <h3 class="text-2xl font-bold text-yellow-500 mb-2">SimplePath Roblox Module</h3>
-                    <p class="text-lg text-gray-300">A pathfinding module to help NPCs navigate obstacles in Roblox games, ensuring smoother AI interactions.</p>
+                <div class="bg-gray-800 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 p-4 md:flex">
+                    <img src="images/movemate.jpeg" alt="MoveMate Screenshot" class="h-48 w-auto rounded-lg mb-4 md:mb-0 md:mr-6 object-cover">
+                    <div>
+                        <h3 class="text-2xl font-bold text-yellow-500 mb-2">MoveMate</h3>
+                        <p class="text-lg text-gray-300">
+                            A simplified fitness tracker we constructed using a micro:bit for the Computing Overseas Learning Expedition. We also constructed 
+                            <a href="https://movemate-0nbn.onrender.com/" class="text-blue-400 underline hover:text-blue-300">a website</a> for it over the holidays.
+                        </p>
+                    </div>
                 </div>
-                <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                    <h3 class="text-2xl font-bold text-yellow-500 mb-2">Rhyming Dictionary (SSEF)</h3>
-                    <p class="text-lg text-gray-300">A rhyming dictionary designed for the Singapore Science and Engineering Fair, helping users find rhyming words.</p>
+                <div class="bg-gray-800 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 p-4 md:flex">
+                    <img src="images/ssef.jpeg" alt="RMD Screenshot." class="h-48 w-auto rounded-lg mb-4 md:mb-0 md:mr-6 object-cover">
+                    <div>
+                        <h3 class="text-2xl font-bold text-yellow-500 mb-2">Rhyming Dictionary (SSEF)</h3>
+                        <p class="text-lg text-gray-300">A dictionary that helps find words that rhyme, developed for the Singapore Science and Engineering Fair.</p>
+                    </div>
                 </div>
-            </div>
+          </div>
         </section>
-        <p class="mt-4"><a href="https://github.com/your-github" class="bg-blue-500 text-white py-2 px-4 rounded">Star on GitHub</a></p>
-    </div>
 
-    <footer class="bg-gray-800 text-white text-center py-4">
-        <p>&copy; 2025 Your Name</p>
-    </footer>
+     </div>
+
+
+   <!--footer and scripts-->
+  <footer class="bg-gray-800 text-white text-center py-4 relative z-10">
+    <p>&copy; Made with Tailwind CSS + kopi. &copy; 2025 Mak Mun Zhong </p>
+  </footer>
+  
+  <script>
+  function openSidebar() {
+    document.getElementById('sidebar').classList.remove('-translate-x-full');
+    document.getElementById('overlay').classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
+    document.getElementById('hamburgerBtn').classList.add('hidden');
+    localStorage.setItem('sidebarOpen', 'true');
+  }
+
+  function closeSidebar() {
+    document.getElementById('sidebar').classList.add('-translate-x-full');
+    document.getElementById('overlay').classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
+    document.getElementById('hamburgerBtn').classList.remove('hidden');
+    localStorage.setItem('sidebarOpen', 'false');
+  }
+      
+  window.addEventListener('DOMContentLoaded', () => {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const hamburger = document.getElementById('hamburgerBtn');
+    const isOpen = localStorage.getItem('sidebarOpen') === 'true';
+
+    if (isOpen) {
+      sidebar.classList.remove('-translate-x-full');
+      overlay.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+      hamburger.classList.add('hidden');
+    } else {
+      sidebar.classList.add('-translate-x-full');
+      overlay.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+      hamburger.classList.remove('hidden');
+    }
+  });
+</script>
 </body>
 </html>
