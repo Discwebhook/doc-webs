@@ -281,15 +281,18 @@
       resp = `💬 ${randomQuote}`;
     } else if (cmd === "clear") {
         out.innerHTML = '';
+        this.value = '';
         return;
       } else if (cmd === "") {
         resp = '';
       } else {
         resp = `'${cmd}' is not recognized. Type 'help' for list of commands.`;
+ this.value = '';
       }
 
   
         if (resp) {
+      resp = resp.replace(/\n/g, '<br>');
       out.innerHTML += `<p>&gt;&gt; ${cmd}</p><p>${resp}</p>`;
       const children = out.querySelectorAll('p');
       while (children.length > 10) {
