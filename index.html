@@ -52,8 +52,9 @@
       <div id="output" class="text-green-300 font-mono text-sm leading-relaxed space-y-1 border-l-4 pl-3 border-green-400 hidden"></div>
 
       <input id="cmdInput" type="text"
-        class="mt-4 w-full bg-transparent border-none text-green-300 font-mono focus:outline-none"
-        placeholder="Type command..." autofocus />
+    class="mt-4 w-full bg-transparent border-none text-green-300 font-mono focus:outline-none opacity-0 pointer-events-none transition-opacity duration-500"
+    placeholder="Type command..." />
+
     </div>
   </div>
 
@@ -180,20 +181,23 @@
 
     
   <script>
-    // Terminal slide-up on scroll
+    let bootCompleted = false;
+  
     window.addEventListener('scroll', () => {
       const term = document.getElementById('terminal');
       if (window.scrollY > 50) {
         term.style.transform = 'translateY(-100%)';
       }
     });
-
-    // Simple command handler
+  
+    // Handle input only after boot
     document.getElementById('cmdInput').addEventListener('keydown', function(e) {
+      if (!bootCompleted) return;
+  
       if (e.key === 'Enter') {
         const cmd = this.value.trim().toLowerCase();
         const out = document.getElementById('output');
-
+  
         let resp = '';
         switch(cmd) {
           case 'about': resp = 'Scrolling to About Me section...'; scrollToSection('about'); break;
@@ -206,36 +210,40 @@
           default:
             resp = `'${cmd}' is not recognized.`;
         }
+  
         if (resp) {
-          out.innerHTML += `<p>>> ${cmd}</p><p>${resp}</p>`;
+          out.innerHTML += `<p>&gt;&gt; ${cmd}</p><p>${resp}</p>`;
           out.scrollTop = out.scrollHeight;
         }
         this.value = '';
       }
     });
-
+  
     function scrollToSection(id) {
       document.getElementById('terminal').style.transform = 'translateY(-100%)';
       setTimeout(() => {
         document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
       }, 400);
     }
-    
-    let isBooted = false;
-
-  function enableInput() {
-    isBooted = true;
-    document.getElementById('cli-input').focus();
-  }
   
+    // Boot finish logic
     setTimeout(() => {
-    document.getElementById('boot-animation').classList.add('hidden');
-    const outputEl = document.getElementById('output');
-    outputEl.classList.remove('hidden');
-    outputEl.innerHTML += `<p>System ready. Enter a command.</p>`;
-    document.getElementById('cmdInput').focus();
-  }, 4000);
-
+      // Hide boot animation
+      document.getElementById('boot-animation').classList.add('hidden');
+  
+      // Show CLI
+      const outputEl = document.getElementById('output');
+      outputEl.classList.remove('hidden');
+      outputEl.innerHTML += `<p>System ready. Enter a command.</p>`;
+  
+      // Reveal input
+      const input = document.getElementById('cmdInput');
+      input.classList.remove('opacity-0', 'pointer-events-none');
+  
+      // Allow command entry
+      bootCompleted = true;
+      input.focus();
+    }, 4000); // Match the animation timing
   </script>
 </body>
 </html>
