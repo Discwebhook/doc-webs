@@ -79,32 +79,6 @@
             <h1 class="text-4xl font-bold text-yellow-400 mb-4">Experience</h1>
             <p class="text-lg text-gray-300">I have experience with <strong>programming languages</strong> like <code>C++</code>, <code>JavaScript</code>, <code>HTML</code>, <code>CSS</code>, <code>Lua</code>, and <code>Python</code>.</p>
         </section>
-
-        <section id="contact" class="mb-8">
-            <h1 class="text-4xl font-bold text-yellow-400 mb-4">Contact</h1>
-            <form>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label for="exampleRecipientInput" class="block text-lg text-gray-300">Reason for Contacting</label>
-                        <select class="w-full p-2 border border-gray-300 rounded" id="exampleRecipientInput">
-                            <option value="Questions">Questions</option>
-                            <option value="Admiration">Admiration</option>
-                            <option value="Can I get your number?">Can I get your number?</option>
-                        </select>
-                    </div>
-                </div>
-                <label for="exampleMessage" class="block text-lg text-gray-300">Message</label>
-                <textarea class="w-full p-2 border border-gray-300 rounded" placeholder="Hi, I have a question…" id="exampleMessage"></textarea>
-                <div class="flex items-center mt-4">
-                    <input type="checkbox" class="mr-2">
-                    <span class="text-gray-300">Send a copy to yourself</span>
-                </div>
-                
-                <a href="mailto:your-email@example.com?subject=Contact%20Form%20Message&body=Reason:%20[Reason]%0AMessage:%20[Message]" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded text-center">
-                    Send Message
-                </a>
-            </form>
-        </section>
     </div>
 
   <!-- footer text -->
@@ -127,8 +101,7 @@
     document.getElementById('hamburgerBtn').classList.remove('hidden');
     localStorage.setItem('sidebarOpen', 'false');
   }
-
-  // Restore sidebar state on load
+      
   window.addEventListener('DOMContentLoaded', () => {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
