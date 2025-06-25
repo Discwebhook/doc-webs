@@ -41,7 +41,7 @@
   <!-- Terminal Overlay -->
   <div id="terminal" class="fixed inset-0 z-50 flex flex-col items-center justify-center px-4 transition-transform duration-700 ease-in-out">
     <div class="bg-black bg-opacity-70 border border-gray-700 backdrop-blur-sm rounded-md p-8 max-w-2xl w-full shadow-2xl">
-      <div class="text-green-400 font-mono mb-4">/usr/portfolio~$ <span id="cursor">|</span></div>
+      <div class="text-green-400 font-mono mb-4">/usr/terminal~$ <span id="cursor">|</span></div>
        
       <div id="boot-animation" class="text-green-300 font-mono text-sm leading-relaxed space-y-1 animate-typewriter overflow-hidden border-l-4 pl-3 border-green-400">
         <p>Booting portfolio...</p>
@@ -79,8 +79,13 @@
   </button>
 
   <!-- Main Content -->
-  <div class="md:ml-64 container mx-auto px-4 py-8">
-        <section id="about" class="mb-8">
+  <div class="relative">
+  <!-- Wave SVG -->
+    <svg class="absolute top-0 left-0 w-full h-32 text-yellow-400" viewBox="0 0 1440 320" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path fill-opacity="0.5" d="M0,64L60,69.3C120,75,240,85,360,112C480,139,600,181,720,197.3C840,213,960,203,1080,176C1200,149,1320,107,1380,85.3L1440,64L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path>
+    </svg>
+    <div class="md:ml-64 container mx-auto px-4 py-8">
+      <section id="about" class="mb-8">
             <h1 class="text-4xl font-bold text-yellow-400 mb-4">About Me</h1>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
@@ -90,51 +95,47 @@
                     <img src="images/Zhong.webp" alt="PFP" class="h-48 w-auto rounded-lg mb-6 md:mb-0 md:mr-7 object-cover" class="rounded-lg shadow-lg w-full h-auto">
                 </div>
             </div>
-        </section>
-
-       <section id="projects" class="mb-8">
-            <h1 class="text-4xl font-bold text-yellow-400 mb-4">Projects</h1>
-            <p class="text-lg text-yellow-200 mb-4">Some of my past year projects</p>
-            
-            <div class="space-y-8">
-                <!-- Project 1 -->
-                <div class="bg-gray-800 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 p-4 md:flex">
-                    <img src="images/scrn3d.png" alt="Screen3d-image" class="h-48 w-auto rounded-lg mb-4 md:mb-0 md:mr-6 object-cover">
-                    <div>
-                        <h3 class="text-2xl font-bold text-yellow-500 mb-2">Screen3D</h3>
-                        <p class="text-lg text-gray-300">A Roblox community resource that allows for the creation of 3D UI with 2D UI components, without the hassle of .RenderStepped loops, or arbitrary offsets, or annoying UI resizing issues.</p>
-                    </div>
-                </div>
-        
-                <!-- Project 2 -->
-                <div class="bg-gray-800 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 p-4 md:flex">
-                    <img src="images/movemate.jpeg" alt="MoveMate Screenshot" class="h-48 w-auto rounded-lg mb-4 md:mb-0 md:mr-6 object-cover">
-                    <div>
-                        <h3 class="text-2xl font-bold text-yellow-500 mb-2">MoveMate</h3>
-                        <p class="text-lg text-gray-300">
-                            A simplified fitness tracker we constructed using a micro:bit for the Computing Overseas Learning Expedition. We also constructed 
-                            <a href="https://movemate-0nbn.onrender.com/" class="text-blue-400 underline hover:text-blue-300">a website</a> for it over the holidays.
-                        </p>
-                    </div>
-                </div>
-        
-                <!-- Project 3 -->
-                <div class="bg-gray-800 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 p-4 md:flex">
-                    <img src="images/ssef.jpeg" alt="RMD Screenshot." class="h-48 w-auto rounded-lg mb-4 md:mb-0 md:mr-6 object-cover">
-                    <div>
-                        <h3 class="text-2xl font-bold text-yellow-500 mb-2">Rhyming Dictionary (SSEF)</h3>
-                        <p class="text-lg text-gray-300">A dictionary that helps find words that rhyme, developed for the Singapore Science and Engineering Fair.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <section id="experience" class="mb-8">
-            <h1 class="text-4xl font-bold text-yellow-400 mb-4">Experience</h1>
-            <p class="text-lg text-gray-300">I have experience with <strong>programming languages</strong> like <code>C++</code>, <code>JavaScript</code>, <code>HTML</code>, <code>CSS</code>, <code>Lua</code>, and <code>Python</code>.</p>
-        </section>
-    </div>
+          </section>
+  
+          <section id="projects" class="mb-8">
+              <h1 class="text-4xl font-bold text-yellow-400 mb-4">Projects</h1>
+              <p class="text-lg text-yellow-200 mb-4">Some of my past year projects</p>
+              
+              <div class="space-y-8">
+                  <div class="bg-gray-800 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 p-4 md:flex">
+                      <img src="images/scrn3d.png" alt="Screen3d-image" class="h-48 w-auto rounded-lg mb-4 md:mb-0 md:mr-6 object-cover">
+                      <div>
+                          <h3 class="text-2xl font-bold text-yellow-500 mb-2">Screen3D</h3>
+                          <p class="text-lg text-gray-300">A Roblox community resource that allows for the creation of 3D UI with 2D UI components, without the hassle of .RenderStepped loops, or arbitrary offsets, or annoying UI resizing issues.</p>
+                      </div>
+                  </div>
+                  <div class="bg-gray-800 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 p-4 md:flex">
+                      <img src="images/movemate.jpeg" alt="MoveMate Screenshot" class="h-48 w-auto rounded-lg mb-4 md:mb-0 md:mr-6 object-cover">
+                      <div>
+                          <h3 class="text-2xl font-bold text-yellow-500 mb-2">MoveMate</h3>
+                          <p class="text-lg text-gray-300">
+                              A simplified fitness tracker we constructed using a micro:bit for the Computing Overseas Learning Expedition. We also constructed 
+                              <a href="https://movemate-0nbn.onrender.com/" class="text-blue-400 underline hover:text-blue-300">a website</a> for it over the holidays.
+                          </p>
+                      </div>
+                  </div>
+                  <div class="bg-gray-800 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 p-4 md:flex">
+                      <img src="images/ssef.jpeg" alt="RMD Screenshot." class="h-48 w-auto rounded-lg mb-4 md:mb-0 md:mr-6 object-cover">
+                      <div>
+                          <h3 class="text-2xl font-bold text-yellow-500 mb-2">Rhyming Dictionary (SSEF)</h3>
+                          <p class="text-lg text-gray-300">A dictionary that helps find words that rhyme, developed for the Singapore Science and Engineering Fair.</p>
+                      </div>
+                  </div>
+              </div>
+          </section>
+  
+  
+          <section id="experience" class="mb-8">
+              <h1 class="text-4xl font-bold text-yellow-400 mb-4">Experience</h1>
+              <p class="text-lg text-gray-300">I have experience with <strong>programming languages</strong> like <code>C++</code>, <code>JavaScript</code>, <code>HTML</code>, <code>CSS</code>, <code>Lua</code>, and <code>Python</code>.</p>
+          </section>
+      </div>
+  </div>
 
 
   <!-- footer text -->
