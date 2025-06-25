@@ -20,57 +20,31 @@
     </style>
 </head>
 <body class="bg-gray-900 text-white">
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-60 z-40 hidden" onclick="closeSidebar()"></div>
 
-    <!-- Overlay -->
-    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden" onclick="toggleSidebar()"></div>
-
-    <!-- Sidebar -->
-    <div id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-gray-800 p-5 transition-transform duration-300 z-50 transform -translate-x-full animated-gradient md:transform-none">
-        <div class="flex items-center justify-between mb-6">
-            <h2 class="text-xl font-bold text-white">Menu</h2>
-            <button onclick="toggleSidebar()" class="text-white text-2xl hidden md:block md:hidden" style="display: none;">&times;</button>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html" class="block py-2 px-4 hover:bg-gray-700 rounded">About Me</a></li>
-                <li><a href="projects.html" class="block py-2 px-4 hover:bg-gray-700 rounded">Projects</a></li>
-                <li><a href="experience.html" class="block py-2 px-4 hover:bg-gray-700 rounded">Experience</a></li>
-                <li><a href="contact.html" class="block py-2 px-4 hover:bg-gray-700 rounded">Contact</a></li>
-            </ul>
-        </nav>
+  <!-- Sidebar -->
+  <aside id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-gray-800 p-6 z-50 transform -translate-x-full transition-transform duration-300 ease-in-out animated-gradient">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-xl font-bold">Menu</h2>
+      <button onclick="closeSidebar()" class="text-white text-2xl">&times;</button>
     </div>
-    
-<!-- Hamburger Button -->
-<button onclick="toggleSidebar()" 
-    class="fixed top-4 left-4 z-[100] text-white text-3xl bg-gray-700 p-2 rounded shadow hover:bg-gray-600 focus:outline-none md:block">
+    <nav>
+      <ul class="space-y-2">
+        <li><a href="index.html" class="block py-2 px-4 hover:bg-gray-700 rounded">About Me</a></li>
+        <li><a href="projects.html" class="block py-2 px-4 hover:bg-gray-700 rounded">Projects</a></li>
+        <li><a href="experience.html" class="block py-2 px-4 hover:bg-gray-700 rounded">Experience</a></li>
+        <li><a href="contact.html" class="block py-2 px-4 hover:bg-gray-700 rounded">Contact</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Hamburger Button -->
+  <button onclick="openSidebar()" class="fixed top-4 left-4 z-50 text-white text-3xl bg-gray-700 p-2 rounded shadow hover:bg-gray-600 md:hidden">
     &#9776;
-</button>
+  </button>
 
-
-    <footer class="bg-gray-800 text-white text-center py-4">
-        <p>&copy; 2025 Your Name</p>
-    </footer>
-
-    <!-- JavaScript -->
-    <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('overlay');
-            const isHidden = sidebar.classList.contains('-translate-x-full');
-
-            if (isHidden) {
-                sidebar.classList.remove('-translate-x-full');
-                sidebar.classList.add('translate-x-0');
-                overlay.classList.remove('hidden');
-            } else {
-                sidebar.classList.add('-translate-x-full');
-                sidebar.classList.remove('translate-x-0');
-                overlay.classList.add('hidden');
-            }
-        }
-    </script>
-    <!-- Main Content -->
-    <div class="md:ml-64 container mx-auto px-4 py-8">
+  <!-- Main Content -->
+  <div class="md:ml-64 container mx-auto px-4 py-8">
         <section id="about" class="mb-8">
             <h1 class="text-4xl font-bold text-yellow-400 mb-4">About Me</h1>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -132,5 +106,26 @@
             </form>
         </section>
     </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white text-center py-4 relative z-10">
+    <p>&copy; 2025 Your Name</p>
+  </footer>
+
+  <!-- Script -->
+  <script>
+    function openSidebar() {
+      document.getElementById('sidebar').classList.remove('-translate-x-full');
+      document.getElementById('overlay').classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeSidebar() {
+      document.getElementById('sidebar').classList.add('-translate-x-full');
+      document.getElementById('overlay').classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    }
+  </script>
+    <!-- Main Content -->
 </body>
 </html>
