@@ -94,15 +94,15 @@
 
        <section id="projects" class="mb-8">
             <h1 class="text-4xl font-bold text-yellow-400 mb-4">Projects</h1>
-            <p class="text-lg font-bold text-yellow-200 mb-4">Some of my past year projects</p>
+            <p class="text-lg text-yellow-200 mb-4">Some of my past year projects</p>
             
             <div class="space-y-8">
                 <!-- Project 1 -->
                 <div class="bg-gray-800 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 p-4 md:flex">
-                    <img src="images/discord-bot.png" alt="Discord Bot Screenshot" class="h-48 w-auto rounded-lg mb-4 md:mb-0 md:mr-6 object-cover">
+                    <img src="images/scrn3d.png" alt="Screen3d-image" class="h-48 w-auto rounded-lg mb-4 md:mb-0 md:mr-6 object-cover">
                     <div>
-                        <h3 class="text-2xl font-bold text-yellow-500 mb-2">Discord Bot Development</h3>
-                        <p class="text-lg text-gray-300">A bot that helps manage communities and adds fun features to Discord servers.</p>
+                        <h3 class="text-2xl font-bold text-yellow-500 mb-2">Screen3D</h3>
+                        <p class="text-lg text-gray-300">A Roblox community resource that allows for the creation of 3D UI with 2D UI components, without the hassle of .RenderStepped loops, or arbitrary offsets, or annoying UI resizing issues.</p>
                     </div>
                 </div>
         
@@ -139,7 +139,7 @@
 
   <!-- footer text -->
   <footer class="bg-gray-800 text-white text-center py-4 relative z-10">
-    <p>(I know you said no placeholders, but I do not know what to put down here) &copy;&copy;&copy; </p>
+    <p>&copy; Made with Tailwind CSS + kopi. &copy; 2025 Mak Mun Zhong </p>
   </footer>
   <script>
   function openSidebar() {
@@ -199,22 +199,105 @@
         const out = document.getElementById('output');
   
         let resp = '';
-        switch(cmd) {
-          case 'about': resp = 'Scrolling to About Me section...'; scrollToSection('about'); break;
-          case 'projects': resp = 'Showing Projects...'; scrollToSection('projects'); break;
-          case 'experience': resp = 'Experience loaded.'; scrollToSection('experience'); break;
-          case 'contact': resp = 'Opening Contact form.'; scrollToSection('contact'); break;
-          case '':
-            resp = '';
-            break;
-          default:
-            resp = `'${cmd}' is not recognized.`;
+
+        const quotes = [
+        "Code is like humour. When you have to explain it, it's bad.",
+        "Programs must be written for people to read, and only incidentally for machines to execute.",
+        "Talk is cheap. Show me the code.",
+      ];
+
+    function singlishify(text) {
+      const lower = text.trim().toLowerCase();
+    
+      // Start with key phrase-level substitutions
+      const phrases = [
+        { from: "i don't know", to: "i also dunno leh" },
+        { from: "how are you", to: "how you sia" },
+        { from: "what are you doing", to: "you doing what sia" },
+        { from: "are you sure", to: "sure anot" },
+        { from: "thank you", to: "thanks hor" },
+        { from: "do you want", to: "you want anot" },
+        { from: "why not", to: "why cannot leh" },
+        { from: "it's okay", to: "ok lah" },
+        { from: "no problem", to: "no prob lah" },
+        { from: "come on", to: "aiya faster lah" },
+        { from: "wait a minute", to: "wait awhile can anot" },
+      ];
+    
+      let result = lower;
+      phrases.forEach(({ from, to }) => {
+        result = result.replace(new RegExp(from, 'gi'), to);
+      });
+    
+      // Light word-level enhancements
+      result = result
+        .replace(/\byou\b/gi, "you lah")
+        .replace(/\bare\b/gi, "are like")
+        .replace(/\breally\b/gi, "sibei")
+        .replace(/\bokay\b/gi, "ok lor")
+        .replace(/\bvery\b/gi, "damn");
+    
+      // Add contextual particle based on tone
+      const endings = ["lah", "lor", "leh", "meh", "hor", "sia"];
+      const neutralEndings = ["lah", "lor", "leh"];
+      const excitedEndings = ["sia", "leh"];
+      const questionEndings = ["meh", "anot"];
+    
+      const lastChar = result.trim().slice(-1);
+      if (!endings.some(e => result.endsWith(e))) {
+        if (lastChar === "?") {
+          result += " " + questionEndings[Math.floor(Math.random() * questionEndings.length)];
+        } else if (lastChar === "!") {
+          result += " " + excitedEndings[Math.floor(Math.random() * excitedEndings.length)];
+        } else {
+          result += " " + neutralEndings[Math.floor(Math.random() * neutralEndings.length)];
         }
+      }
+    
+      return result.charAt(0).toUpperCase() + result.slice(1);
+    }
+
+      if (cmd.startsWith("navto ")) {
+        const section = cmd.slice(6).toLowerCase();
+        const sectionMap = {
+          about: "About Me section",
+          projects: "Projects section",
+          experience: "Experience section",
+          contact: "Contact section"
+        };
+        if (sectionMap[section]) {
+          resp = `Navigating to ${sectionMap[section]}...`;
+          scrollToSection(section);
+        } else {
+          resp = `Unknown section '${section}'. Try: about, projects, experience, contact.`;
+        }
+      } else if (cmd === "help") {
+        resp = `Available commands:\n- navto <section>\n- quote\n- singlishify\n- clear\n(Enter commands without the hyphen)`;
+      else if (cmd.startsWith("singlishify ") || cmd.startsWith("sg ") || cmd.startsWith("lahify ")) {
+        const input = cmd.replace(/^(singlishify|sg|lahify)\s+/, "");
+        resp = input ? `🗣️ ${singlishify(input)}` : "Say something first lah.";
+      } else if (cmd === "quote") {
+      const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+      resp = `💬 ${randomQuote}`;
+    } else if (cmd === "clear") {
+        out.innerHTML = '';
+        return;
+      } else if (cmd === "") {
+        resp = '';
+      } else {
+        resp = `'${cmd}' is not recognized. Type 'help' for list of commands.`;
+      }
+
   
         if (resp) {
-          out.innerHTML += `<p>&gt;&gt; ${cmd}</p><p>${resp}</p>`;
-          out.scrollTop = out.scrollHeight;
-        }
+      out.innerHTML += `<p>&gt;&gt; ${cmd}</p><p>${resp}</p>`;
+      const children = out.querySelectorAll('p');
+      while (children.length > 10) {
+        out.removeChild(children[0]);
+      }
+    
+      out.scrollTop = out.scrollHeight;
+    }
         this.value = '';
       }
     });
