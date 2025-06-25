@@ -1,45 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me - Your Portfolio</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="icon" href="images/favicon.png">
-    <style>
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        .animated-gradient {
-            background: linear-gradient(270deg, #1e3a8a, #9333ea, #10b981);
-            background-size: 600% 600%;
-            animation: gradientShift 15s ease infinite;
-        }
-@keyframes typewriter {
-  from { width: 0 }
-  to { width: 100% }
-}
-.animate-typewriter p {
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  border-right: 2px solid limegreen;
-  animation: typewriter 3s steps(40) 1 normal both;
-}
-.animate-typewriter p:nth-child(2) { animation-delay: 0.5s; }
-.animate-typewriter p:nth-child(3) { animation-delay: 1s; }
-.animate-typewriter p:nth-child(4) { animation-delay: 1.5s; }
-.animate-typewriter p:nth-child(5) { animation-delay: 2s; border-right: none; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Me - Your Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+  <link rel="icon" href="images/favicon.png">
+  <style>
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .animated-gradient {
+      background: linear-gradient(270deg, #1e3a8a, #9333ea, #10b981);
+      background-size: 600% 600%;
+      animation: gradientShift 15s ease infinite;
+    }
+    /* Typewriter */
+    @keyframes typewriter { from{width:0} to{width:100%}}
+    .animate-typewriter p {
+      width:100%; white-space:nowrap; overflow:hidden;
+      border-right:2px solid limegreen;
+      animation:typewriter 3s steps(40) 1 both;
+    }
+    .animate-typewriter p:nth-child(2){animation-delay:.5s;}
+    .animate-typewriter p:nth-child(3){animation-delay:1s;}
+    .animate-typewriter p:nth-child(4){animation-delay:1.5s;}
+    .animate-typewriter p:nth-child(5){animation-delay:2s;border-right:none;}
 
-    </style>
+    /* Terminal Overlay Gradient */
+    #terminal {
+      background:#000e;
+      background:linear-gradient(to bottom, rgba(0,0,0,0.9), transparent 70%);
+    }
+  </style>
 </head>
-<body class="bg-gray-900 text-white">
-    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-60 z-40 hidden" onclick="closeSidebar()"></div>
+<body class="bg-gray-900 text-white overflow-x-hidden">
 
-  <!-- Sidebar -->
-  <aside id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-gray-800 p-6 z-50 transform -translate-x-full transition-transform duration-300 ease-in-out animated-gradient">
+  <!-- Terminal Overlay -->
+  <div id="terminal" class="fixed inset-0 z-50 flex flex-col items-center justify-center px-4 transition-transform duration-700 ease-in-out">
+    <div class="bg-black bg-opacity-70 border border-gray-700 backdrop-blur-sm rounded-md p-8 max-w-2xl w-full shadow-2xl">
+      <div class="text-green-400 font-mono mb-4">/usr/portfolio~$ <span id="cursor">|</span></div>
+      <div id="output" class="text-green-300 font-mono text-sm leading-relaxed space-y-1 animate-typewriter overflow-hidden border-l-4 pl-3 border-green-400">
+        <p>Booting portfolio...</p>
+        <p>Loading modules...</p>
+        <p>Injecting creativity engine...</p>
+        <p>Ready for command.</p>
+      </div>
+      <input id="cmdInput" type="text"
+        class="mt-4 w-full bg-transparent border-none text-green-300 font-mono focus:outline-none"
+        placeholder="Type command..." autofocus />
+    </div>
+  </div>
+
+    <aside id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-gray-800 p-6 z-50 transform -translate-x-full transition-transform duration-300 ease-in-out animated-gradient">
     <div class="flex items-center justify-between mb-6">
       <h2 class="text-xl font-bold">Menu</h2>
       <button onclick="closeSidebar()" class="text-white text-2xl">&times;</button>
@@ -171,6 +186,49 @@
   });
 </script>
 
-    <!-- Main Content -->
+
+    
+  <script>
+    // Terminal slide-up on scroll
+    window.addEventListener('scroll', () => {
+      const term = document.getElementById('terminal');
+      if (window.scrollY > 50) {
+        term.style.transform = 'translateY(-100%)';
+      }
+    });
+
+    // Simple command handler
+    document.getElementById('cmdInput').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        const cmd = this.value.trim().toLowerCase();
+        const out = document.getElementById('output');
+
+        let resp = '';
+        switch(cmd) {
+          case 'about': resp = 'Scrolling to About Me section...'; scrollToSection('about'); break;
+          case 'projects': resp = 'Showing Projects...'; scrollToSection('projects'); break;
+          case 'experience': resp = 'Experience loaded.'; scrollToSection('experience'); break;
+          case 'contact': resp = 'Opening Contact form.'; scrollToSection('contact'); break;
+          case '':
+            resp = '';
+            break;
+          default:
+            resp = `'${cmd}' is not recognized.`;
+        }
+        if (resp) {
+          out.innerHTML += `<p>${resp}</p>`;
+          out.scrollTop = out.scrollHeight;
+        }
+        this.value = '';
+      }
+    });
+
+    function scrollToSection(id) {
+      document.getElementById('terminal').style.transform = 'translateY(-100%)';
+      setTimeout(() => {
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+      }, 400);
+    }
+  </script>
 </body>
 </html>
