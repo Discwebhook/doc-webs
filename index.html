@@ -273,7 +273,7 @@
         }
       } else if (cmd === "help") {
         resp = `Available commands:\n- navto <section>\n- quote\n- singlishify\n- clear\n(Enter commands without the hyphen)`;
-      else if (cmd.startsWith("singlishify ") || cmd.startsWith("sg ") || cmd.startsWith("lahify ")) {
+      } else if (cmd.startsWith("singlishify ") || cmd.startsWith("sg ") || cmd.startsWith("lahify ")) {
         const input = cmd.replace(/^(singlishify|sg|lahify)\s+/, "");
         resp = input ? `🗣️ ${singlishify(input)}` : "Say something first lah.";
       } else if (cmd === "quote") {
