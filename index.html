@@ -28,8 +28,7 @@
     .animate-typewriter p:nth-child(3){animation-delay:1s;}
     .animate-typewriter p:nth-child(4){animation-delay:1.5s;}
     .animate-typewriter p:nth-child(5){animation-delay:2s;border-right:none;}
-
-    /* Terminal Overlay Gradient */
+    
     #terminal {
       background:#000e;
       background:linear-gradient(to bottom, rgba(0,0,0,0.9), transparent 70%);
@@ -38,7 +37,7 @@
 </head>
 <body class="bg-gray-900 text-white overflow-x-hidden">
 
-  <!-- Terminal Overlay -->
+  <!-- T-O -->
   <div id="terminal" class="fixed inset-0 z-50 flex flex-col items-center justify-center px-4 transition-transform duration-700 ease-in-out">
     <div class="bg-black bg-opacity-70 border border-gray-700 backdrop-blur-sm rounded-md p-8 max-w-2xl w-full shadow-2xl">
       <div class="text-green-400 font-mono mb-4">/usr/terminal~$ <span id="cursor">|</span></div>
@@ -48,7 +47,7 @@
         <p>Ready for command. Scroll down to exit Terminal.</p>
       </div>
       
-      <!-- CLI output block -->
+      <!-- CLI output style -->
       <div id="output" class="text-green-300 font-mono text-sm leading-relaxed space-y-1 border-l-4 pl-3 border-green-400 hidden"></div>
 
       <input id="cmdInput" type="text"
@@ -66,7 +65,7 @@
     </div>
     <nav>
       <ul class="space-y-2">
-        <li><a href="index.html" class="block py-2 px-4 hover:bg-gray-700 rounded">About Me</a></li>
+        <li><p class="block py-2 px-4 hover:bg-gray-700 rounded">About Me</p></li>
         <li><a href="projects.html" class="block py-2 px-4 hover:bg-gray-700 rounded">Projects</a></li>
         <li><a href="experience.html" class="block py-2 px-4 hover:bg-gray-700 rounded">Experience</a></li>
       </ul>
@@ -177,6 +176,7 @@
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
     const hamburger = document.getElementById('hamburgerBtn');
+    localStorage.setItem('sidebarOpen',false)
     const isOpen = localStorage.getItem('sidebarOpen') === 'true';
 
     if (isOpen) {
@@ -328,7 +328,7 @@
   
       const outputEl = document.getElementById('output');
       outputEl.classList.remove('hidden');
-      outputEl.innerHTML += `<p>Enter "help" for a list of commands.</p>`;
+      outputEl.innerHTML += `<p>Booting portfolio...<be>Enter "help" for a list of commands.</p>`;
   
       const input = document.getElementById('cmdInput');
       input.classList.remove('opacity-0', 'pointer-events-none');
